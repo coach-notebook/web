@@ -1,0 +1,60 @@
+version: "3.9"
+services:
+  database:
+    image: postgres:13
+    environment:
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+      POSTGRES_DB: ${PG_DATABASE}
+    volumes:
+      - pg-data:/var/config/postgresql/data
+    ports:
+      - "5432:5432"
+  redis:
+    image: redis:latest
+  rails: 
+    env_file: .env
+    build:
+      context: .
+    depends_on:
+      - database
+    ports: 
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - gem-cache:/usr/local/bundle/gems
+      - node-modules:/app/node_modules
+    command: "bin/rails server --port=3000 --binding=0.0.0.0 --pid=tmp/pids/server.pid"
+  javascript: 
+    env_file: .env
+    build:
+      context: .
+    volumes:
+      - .:/app
+      - gem-cache:/usr/local/bundle/gems
+      - node-modules:/app/node_modules
+    command: "node ./config/esbuild.config.js --watch"
+  css: 
+    env_file: .env
+    build:
+      context: .
+    volumes:
+      - .:/app
+      - gem-cache:/usr/local/bundle/gems
+      - node-modules:/app/node_modules
+    command: "yarn tailwind build --config ./config/tailwind.config.js --input ./app/assets/stylesheets/application.css --output ./app/assets/builds/application.css --watch"
+  sidekiq:
+    env_file: .env
+    build:
+      context: .
+    depends_on:
+      - rails
+      - redis
+    volumes:
+      - .:/app
+      - gem-cache:/usr/local/bundle/gems
+      - node-modules:/app/node_modules
+    command: "bundle exec sidekiq"
+volumes:
+  gem-cache: 
+  node-modules:
+  pg-data:

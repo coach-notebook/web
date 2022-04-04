@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/bin/node /usr/share/yarn/bin/yarn.js add @tailwindcss/defaultTheme
+  /usr/bin/node /usr/share/yarn/bin/yarn.js add @headlessui/react @heroicons/react/solid @heroicons/react/outline
 
 PATH: 
   /usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -14,8 +14,8 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@tailwindcss%2fdefaultTheme: Not found
-      at Request.params.callback [as _callback] (/usr/share/yarn/lib/cli.js:66138:18)
+  Error: https://registry.yarnpkg.com/@heroicons%2freact/solid: Request "https://registry.yarnpkg.com/@heroicons%2freact/solid" returned a 405
+      at Request.params.callback [as _callback] (/usr/share/yarn/lib/cli.js:66147:18)
       at Request.self.callback (/usr/share/yarn/lib/cli.js:140883:22)
       at Request.emit (events.js:314:20)
       at Request.<anonymous> (/usr/share/yarn/lib/cli.js:141855:10)

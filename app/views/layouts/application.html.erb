@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="h-full bg-gray-100">
   <head>
     <title>Xxxbk</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -7,11 +7,12 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application" %>
     <%= javascript_include_tag "application", defer: true %>
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.1/dist/flowbite.min.css" />
   </head>
-  <body>
-    <div class="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
+  <body class="h-full">
     <%= yield %> 
     <div id="app" />
-    </div>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/flowbite@1.4.1/dist/flowbite.js"></script>
   </body>
 </html>

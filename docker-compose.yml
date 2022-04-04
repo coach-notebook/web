@@ -11,6 +11,8 @@ services:
       - "5432:5432"
   redis:
     image: redis:latest
+    ports: 
+      - "6379:6379"
   rails: 
     env_file: .env
     build:
@@ -24,24 +26,6 @@ services:
       - gem-cache:/usr/local/bundle/gems
       - node-modules:/app/node_modules
     command: "bin/rails server --port=3000 --binding=0.0.0.0 --pid=tmp/pids/server.pid"
-  javascript: 
-    env_file: .env
-    build:
-      context: .
-    volumes:
-      - .:/app
-      - gem-cache:/usr/local/bundle/gems
-      - node-modules:/app/node_modules
-    command: "node ./config/esbuild.config.js --watch"
-  css: 
-    env_file: .env
-    build:
-      context: .
-    volumes:
-      - .:/app
-      - gem-cache:/usr/local/bundle/gems
-      - node-modules:/app/node_modules
-    command: "yarn tailwind build --config ./config/tailwind.config.js --input ./app/assets/stylesheets/application.css --output ./app/assets/builds/application.css --watch"
   sidekiq:
     env_file: .env
     build:
@@ -53,7 +37,25 @@ services:
       - .:/app
       - gem-cache:/usr/local/bundle/gems
       - node-modules:/app/node_modules
-    command: "bundle exec sidekiq"
+    command: ""
+  # javascript: 
+  #   env_file: .env
+  #   build:
+  #     context: .
+  #   volumes:
+  #     - .:/app
+  #     - gem-cache:/usr/local/bundle/gems
+  #     - node-modules:/app/node_modules
+  #   command: "node ./config/esbuild.config.js --watch"
+  # css: 
+  #   env_file: .env
+  #   build:
+  #     context: .
+  #   volumes:
+  #     - .:/app
+  #     - gem-cache:/usr/local/bundle/gems
+  #     - node-modules:/app/node_modules
+  #   command: "yarn tailwind build --watch --config ./config/tailwind.config.js --input ./app/assets/stylesheets/application.css --output ./app/assets/builds/application.css"
 volumes:
   gem-cache: 
   node-modules:

@@ -1,9 +1,10 @@
 module.exports = {
   content: [
     "./app/helpers/**/*.rb",
-    "./app/javascript/**/*.tsx",
     "./app/views/**/*.(haml|erb)",
+    // "./app/frontend/**/*.(ts|tsx)",
     "./app/components/**/*.(haml|erb)",
+    "./app/frontend/entrypoints/application.css",
   ],
   theme: {
     fontFamily: {

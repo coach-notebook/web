@@ -1,0 +1,21 @@
+!!!5 
+%html{class: "h-full bg-white dark:bg-slate-900 dark:text-slate-100"}
+  %head
+    %title= [yield(:subtitle), yield(:title), t(:title)].compact.join(" | ") 
+    %meta{ name: "viewport", content: "width=device-width,initial-scale=1" }
+    %link{ rel: "preconnect", href: "//fonts.googleapis.com" }
+    %link{ rel: "preconnect", href: "//fonts.gstatic.com", crossorigin: true }
+    %link{ rel: "stylesheet", href: "//fonts.googleapis.com/css2?family=Anek+Tamil:wght@100;400;700&display=swap" }
+    = csrf_meta_tags
+    = csp_meta_tag
+    = vite_client_tag
+    = vite_typescript_tag "application"
+    = vite_stylesheet_tag "application"
+    = vite_react_refresh_tag  
+  %body
+    .pb-32
+      = render "navigation"
+      = yield :header
+    %main.-mt-32
+      .width.pb-12
+        = yield 

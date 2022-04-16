@@ -36,6 +36,6 @@ class DrillsController < ApplicationController
   end
 
   def set_drill
-    @drill = Drill.find_by(id: params[:id], library: @current_user.libraries)
+    @drill = Drill.find_by(id: params[:id], library: current_user.libraries)
   end
 end

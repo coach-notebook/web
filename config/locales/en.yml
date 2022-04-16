@@ -11,6 +11,8 @@ en:
       failed: Check email address & password
   user:
     create: Sign Up
+    created:
+      success: Successful Sign Up
   time:
     formats:
       day_date: "%A, %-d %B"

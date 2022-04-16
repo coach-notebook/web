@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     if @user.valid?
       user_session = @user.sessions.create
       session[:token] = user_session.token
-      flash[:success] = t("user.created")
+      flash[:success] = t("user.created.success")
       redirect_to root_path
     else
       flash[:warning] = @user.errors.full_messages

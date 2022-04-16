@@ -8,6 +8,6 @@ generates:
       - "typescript-operations"
       - "typescript-react-apollo"
       - "fragment-matcher"
-  app/graphql/plybk_schema.json:
+  app/graphql/coach_notebook_schema.json:
     plugins:
       - "introspection"

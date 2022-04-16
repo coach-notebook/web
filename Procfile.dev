@@ -1,2 +1,0 @@
-js: node ./config/esbuild.config.js --watch
-css: npx tailwindcss --watch --config ./config/tailwind.config.js --input ./app/assets/stylesheets/application.css --output ./app/assets/builds/application.css

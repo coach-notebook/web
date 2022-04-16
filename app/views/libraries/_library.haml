@@ -1,0 +1,5 @@
+= link_to library, class: "cell" do
+    .cell-image
+    .cell-header= library.name
+    .cell-byline= library.user
+    .cell-byline= pluralize library.drills.count, Drill.model_name.human

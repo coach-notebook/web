@@ -1,0 +1,24 @@
+= render PageHeader.new(title: @drill.name, subtitle: pluralize(@drill.duration_minutes, t(:minute))) do 
+    = link_to t("drill.edit"), edit_drill_path(@drill), class: "btn-primary"
+.page-list
+    %div
+        .pb-4
+            - @drill.tags.each do |tag|
+                .tag= t("tags.#{tag}")
+        = markdown @drill.body
+    - if @drill.keys?
+        %div
+            .heading-1= Drill.human_attribute_name(:keys) 
+            - @drill.keys.each do |key|
+                .text-sm= key 
+    - if @drill.variations?
+        %div
+            .heading-1= Drill.human_attribute_name(:variations) 
+            - @drill.variations.each do |variation|
+                .text-sm= variation 
+
+    - if @drill.goals?
+        %div
+            .heading-1= Drill.human_attribute_name(:goals) 
+            - @drill.goals.each do |goal|
+                .text-sm= goal 

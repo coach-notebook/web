@@ -2,9 +2,14 @@ module.exports = {
   content: [
     "./app/helpers/**/*.rb",
     "./app/javascript/**/*.tsx",
-    "./app/views/**/*.erb",
+    "./app/views/**/*.(haml|erb)",
+    "./app/components/**/*.(haml|erb)",
   ],
-  theme: {},
+  theme: {
+    fontFamily: {
+      sans: ["'Anek Tamil'", "Helvetica", "Arial", "sans-serif"],
+    },
+  },
   plugins: [
     require("@tailwindcss/forms"),
     require("@tailwindcss/aspect-ratio"),

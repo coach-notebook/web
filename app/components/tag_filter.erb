@@ -1,0 +1,5 @@
+<div class="w-full text-xs text-slate-300">
+    <% ActsAsTaggableOn::Tag.most_used.each do |tag| %>
+        <a href="?=<%= tag %>" class="tag"><%= t("tags.#{tag}") %></a>
+    <% end %>
+</div>

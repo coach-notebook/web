@@ -5,9 +5,8 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-require "faker"
-
-user = User.create(email_address: "alice@example.com", name: "Alice")
-user.sessions.create
-
-user.teams.create(name: Faker::Sports::Basketball.team, season: "Summer 2022")
+user = FactoryBot.create(:user)
+FactoryBot.create_list(:library_with_plays_and_drills, 5, user: user)
+FactoryBot.create_list(:squad, 5, user: user).each do |squad|
+  FactoryBot.create_list(:practice, 5, squad: squad)
+end

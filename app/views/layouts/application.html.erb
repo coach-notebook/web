@@ -1,18 +1,25 @@
 <!DOCTYPE html>
-<html class="h-full bg-gray-100">
+<html class="h-full bg-white">
   <head>
-    <title>Xxxbk</title>
+    <title><%= [yield(:subtitle), yield(:title), t(:title)].compact.join(" | ") %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Tamil:wght@100;400;700&display=swap" rel="stylesheet">
     <%= stylesheet_link_tag "application" %>
     <%= javascript_include_tag "application", defer: true %>
-    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.1/dist/flowbite.min.css" />
   </head>
-  <body class="h-full">
-    <%= yield %> 
-    <div id="app" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/flowbite@1.4.1/dist/flowbite.js"></script>
+  <body class="bg-white">
+      <div class="bg-white pb-32">
+        <%= render "navigation" %>
+        <%= yield :header %>
+      </div>
+      <main class="-mt-32">
+        <div class="max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
+            <%= yield %>
+        </div>
+      </main>
   </body>
 </html>

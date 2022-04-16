@@ -1,0 +1,34 @@
+= render PageHeader.new(title: l(@practice.practice_at, format: :day_date), subtitle: [@practice.squad.name, @practice.squad.season, @practice.squad.competition].compact.join(" | ")) do 
+    = render Rating.new(rating: @practice.rating) if @practice.past?
+.page-list
+    - if @practice.review?
+        .-mx-4.p-4.rounded-md.bg-slate-200
+            .text-sm.font-bold= Drill.human_attribute_name(:review) 
+            .text-sm= @practice.review
+    - else 
+        - if @practice.past?
+            = form_for @practice, builder: CoachNotebookFormBuilder do |form|
+                .mb-2
+                    = form.text_area :review
+                = form.submit "Save", class: "btn-primary"
+    - @practice.practice_drills.order(:position).each do |practice_drill| 
+        .main
+            .sidebar
+                .heading-1= link_to practice_drill.drill.name, drill_path(practice_drill.drill)
+                .byline= pluralize practice_drill.drill.duration_minutes, Drill.human_attribute_name(:minute) 
+                - practice_drill.drill.tags.each do |tag|
+                    .tag= t("tags.#{tag}")
+                - unless @practice.past?
+                    = button_to "remove", "/practices/#{@practice.id}/drills/#{practice_drill.drill.id}", class: "btn-secondary", method: :delete
+            .body
+                = markdown practice_drill.drill.body
+                = render Rating.new(rating: @practice.rating, url: "#") if @practice.past?
+                - if practice_drill.variation?
+                    .text-sm= practice_drill.variation 
+                - if practice_drill.drill.keys?
+                    .text-xs.text-slate-500= Drill.human_attribute_name(:keys) 
+                    .text-sm= practice_drill.drill.keys.to_sentence
+    - unless @practice.past?
+        = form_tag "/practices/#{@practice.id}/drills", builder: CoachNotebookFormBuilder do
+            = select_tag :drill_id, options_from_collection_for_select(@current_user.drills, :id, :name), class: "form-input"
+            = submit_tag t("drill.new"), class: "btn-primary"

@@ -1,0 +1,7 @@
+= link_to practice, class: :cell do
+    .cell-image
+    .cell-header
+        = l(practice.practice_at, format: :day_date)
+    .cell-byline= practice.squad
+    - if practice.past? 
+        = practice.rating

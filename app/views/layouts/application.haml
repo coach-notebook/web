@@ -1,11 +1,8 @@
 !!!5 
 %html
   %head
-    %title= [yield(:subtitle), yield(:title), t(:title)].compact.join(" | ") 
+    %title= [yield(:subtitle), yield(:title), t('app.name')].select{|x| !x.blank? }.join(" | ") 
     %meta{ name: "viewport", content: "width=device-width,initial-scale=1" }
-    %link{ rel: "preconnect", href: "//fonts.googleapis.com" }
-    %link{ rel: "preconnect", href: "//fonts.gstatic.com", crossorigin: true }
-    %link{ rel: "stylesheet", href: "//fonts.googleapis.com/css2?family=Anek+Tamil:wght@100;400;700&display=swap" }
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag "application", "data-turbo-track": "reload"

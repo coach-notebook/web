@@ -2,7 +2,7 @@
     .hidden.md:block.justify-start
         .flex.items-center.gap-2
             - if current_user
-                = link_to t("app.name"), root_path, class: "nav-button font-bold font-black dark:font-weight bg-neutral-800"
+                = link_to t("app.name"), root_path, class: "nav-button font-bold font-black dark:font-weight bg-neutral-100 dark:bg-neutral-800"
                 - if Flipper.enabled?(:drills, current_user)
                     = link_to Library.model_name.human.pluralize, libraries_path, class: "nav-button"
                     = link_to Practice.model_name.human.pluralize, practices_path, class: "nav-button"

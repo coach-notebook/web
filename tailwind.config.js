@@ -6,11 +6,6 @@ module.exports = {
     "./app/components/**/*.(haml|erb)",
     "./app/frontend/entrypoints/application.css",
   ],
-  theme: {
-    fontFamily: {
-      sans: ["'Anek Tamil'", "Helvetica", "Arial", "sans-serif"],
-    },
-  },
   plugins: [
     require("@tailwindcss/forms"),
     require("@tailwindcss/aspect-ratio"),

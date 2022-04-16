@@ -18,6 +18,8 @@ class Squad < ApplicationRecord
   has_many :teams
   belongs_to :user
 
+  validates :name, presence: true
+
   scope :active, -> { where(active: true) }
   scope :inactive, -> { where(active: false) }
 end

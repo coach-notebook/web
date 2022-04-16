@@ -1,7 +1,7 @@
-- practice_options = @current_user.practices.map{|p| [p.practice_at.to_s + " - " + p.drills.limit(5).map(&:name).to_sentence, p.id] }
 = render PageHeader.new(title: Practice.model_name.human) 
 = form_with model: @practice, class:"flex flex-col space-y-4", builder: CoachNotebookFormBuilder do |form|
     = form.datetime_field :practice_at
-    = form.select :copy_practice_id, options_for_select(practice_options)
+    = form.select :copy_practice_id, options_for_select( current_user.practices.map{|p| [p.practice_at.to_s + " - " + p.drills.limit(5).map(&:name).to_sentence, p.id] })
     = form.hidden_field(:squad_id) if @squad
+    
     = form.submit "submit", class: "btn-primary"

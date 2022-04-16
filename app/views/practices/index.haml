@@ -1,7 +1,7 @@
 = render PageHeader.new(title: Practice.model_name.human.pluralize) do 
     = link_to t("practice.new"), new_practice_path
 .page-title= Practice.model_name.human.pluralize
-.gridx4= render @practices.order(:practice_at).where('practice_at > ?', Time.now)
+.gridx4= render Practice.future
 .rule 
 .page-title= Practice.model_name.human.pluralize
-.gridx4= render @practices.order(:practice_at).where('practice_at < ?', Time.now)
+.gridx4= render Practice.past

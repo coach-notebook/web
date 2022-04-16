@@ -1,58 +1,64 @@
 class PracticesController < ApplicationController
-  before_action :set_practice
+  before_action :set_practice, only: [:edit, :update, :destroy, :show, :add_drill, :remote_drive]
 
   def safe_params
     params.require(:practice).permit(:practice_at, :copy_practice_id, :squad_id, :review)
   end
 
   def new
-    @practice = Practice.new(squad_id: params[:squad_id])
+    @practice = Practice.new
+    render template: "practices/form"
+  end
+
+  def edit
     render template: "practices/form"
   end
 
   def create
-    @original_practice = @squad.practices.find_by(id: safe_params[:copy_practice_id])
-    @practice = @squad.practices.create(practice_at: safe_params[:practice_at])
+    @practice = Practice.create(practice_at: safe_params[:practice_at], squad_id: safe_params[:squad_id])
+    @practice.copy_drills_from(safe_params[:copy_practice_id])
     if @practice.valid?
-      @original_practice.drills.each do |drill|
-        @practice.practice_drills.create(drill: drill)
-      end
       flash[:success] = t("squad.created")
-      redirect_to [@squad, @practice]
+      redirect_to @practice
     else
-      flash[:warning] = @squad.errors.full_messages
-      render template: "drills/new"
+      flash[:warning] = @practice.errors.full_messages
+      render template: "practices/form"
     end
   end
 
   def update
     @practice.update(safe_params)
     if @practice.valid?
-      redirect_to [@squad, @practice]
+      flash[:success] = t("squad.updated")
+      redirect_to @practice
     else
-      flash[:warning] = @squad.errors.full_messages
-      render template: "squads/form"
+      flash[:warning] = @practice.errors.full_messages
+      render template: "practices/form"
+    end
+  end
+
+  def destroy
+    if @practice.delete
+      flash[:success] = t("squad.deleted")
+      redirect_to practices_path
+    else
+      flash[:warning] = @practice.errors.full_messages
+      redirect_to practices_path
     end
   end
 
   def add_drill
-    @drill = @current_user.drills.find_by(id: params[:drill_id])
-    @practice = Practice.find_by(id: params[:id], squad: @current_user.squads)
-    @practice.practice_drills.create(drill: @drill)
+    @practice.practice_drills.create(drill_id: params[:drill_id])
     redirect_to practice_path(@practice)
   end
 
   def remove_drill
-    @drill = @current_user.drills.find_by(id: params[:drill_id])
-    @practice = Practice.find_by(id: params[:id], squad: @current_user.squads)
-    @practice.practice_drills.find_by(drill: @drill).destroy
+    @practice.practice_drills.find_by(drill_id: params[:drill_id]).destroy
     redirect_to practice_path(@practice)
   end
 
   def set_practice
-    @squads = @current_user.squads
-    @squad = @squads.find_by(id: params[:squad_id])
-    @practices = Practice.where(squad: @current_user.squads)
-    @practice = @practices.find_by(id: params[:id])
+    @practice = Practice.find_by(id: params[:id])
+    fail ActiveRecord::RecordNotFound unless @practice
   end
 end

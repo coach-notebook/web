@@ -30,5 +30,5 @@
                     .text-sm= practice_drill.drill.keys.to_sentence
     - unless @practice.past?
         = form_tag "/practices/#{@practice.id}/drills", builder: CoachNotebookFormBuilder do
-            = select_tag :drill_id, options_from_collection_for_select(@current_user.drills, :id, :name), class: "form-input"
+            = select_tag :drill_id, options_from_collection_for_select(current_user.drills, :id, :name), class: "form-input"
             = submit_tag t("drill.new"), class: "btn-primary"

@@ -7,15 +7,13 @@ Rails.application.routes.draw do
   delete "/practices/:id/drills/:drill_id", to: "practices#remove_drill"
   root "dashboard#show"
 
-  resources :squads do
-    resources :practices
-    resources :players
-  end
+  resources :drills
   resources :practices
 
+  resources :squads do
+    resources :players
+  end
   resources :libraries do
     resource :drills
   end
-
-  resources :drills
 end

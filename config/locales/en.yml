@@ -10,6 +10,8 @@ en:
       success: Successfully Created Squad
   team:
     squads_empty: No Squads Found
+    create:
+      success: Successfully Created Team
   session:
     new: Sign In
     create:

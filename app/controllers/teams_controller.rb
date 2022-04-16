@@ -28,7 +28,7 @@ class TeamsController < ApplicationController
     @team = Team.create(safe_params)
     if @team.valid?
       current_user.access_controls.create(access_controlled: @team)
-      flash[:success] = t("team.created")
+      flash[:success] = t("team.create.success")
       redirect_to @team
     else
       flash[:warning] = @team.errors.full_messages

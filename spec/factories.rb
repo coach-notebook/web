@@ -43,7 +43,6 @@ FactoryBot.define do
 
   factory :library do
     name { Faker::Lorem.word }
-    notes { Faker::Lorem.paragraph }
     user
     factory :library_with_drills do
       transient do

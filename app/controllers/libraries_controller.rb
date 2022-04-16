@@ -2,7 +2,7 @@ class LibrariesController < ApplicationController
   before_action :set_library, only: [:show, :update, :edit, :destory]
 
   def safe_params
-    params.require(:library).permit(:name, :notes)
+    params.require(:library).permit(:name)
   end
 
   def index
@@ -18,7 +18,7 @@ class LibrariesController < ApplicationController
     @library = Library.create safe_params.merge(user: current_user)
     if @library.valid?
       current_user.access_controls.create(access_controlled: @library)
-      flash[:success] = t("library.created")
+      flash[:success] = t("library.create.success")
       redirect_to @library
     else
       flash[:warning] = @library.errors.full_messages

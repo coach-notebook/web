@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     @comment = Comment.create safe_params.merge(user: current_user)
     if @comment.valid?
       current_user.access_controls.create(access_controlled: @comment)
-      flash[:success] = t("comment.created")
+      flash[:success] = t("comment.create.success")
     else
       flash[:warning] = @comment.errors.full_messages
     end

@@ -38,7 +38,7 @@ class PracticesController < ApplicationController
     if @practice.valid?
       @practice.copy_drills_from(safe_params[:copy_practice_id])
       current_user.access_controls.create(access_controlled: @practice)
-      flash[:success] = t("practice.created")
+      flash[:success] = t("practice.create.success")
       redirect_to @practice
     else
       flash[:warning] = @practice.errors.full_messages
@@ -49,7 +49,7 @@ class PracticesController < ApplicationController
   def update
     @practice.update(safe_params)
     if @practice.valid?
-      flash[:success] = t("practice.updated")
+      flash[:success] = t("practice.update.success")
       redirect_to @practice
     else
       flash[:warning] = @practice.errors.full_messages
@@ -59,7 +59,7 @@ class PracticesController < ApplicationController
 
   def destroy
     if @practice.delete
-      flash[:success] = t("squad.deleted")
+      flash[:success] = t("squad.delete.success")
     else
       flash[:warning] = @practice.errors.full_messages
     end

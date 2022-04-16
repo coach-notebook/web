@@ -67,7 +67,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_19_104240) do
   create_table "libraries", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.string "name"
-    t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_libraries_on_user_id"
@@ -146,8 +145,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_19_104240) do
     t.integer "tag_id"
     t.string "taggable_type", null: false
     t.uuid "taggable_id", null: false
-    t.string "tagger_type", null: false
-    t.uuid "tagger_id", null: false
+    t.string "tagger_type"
+    t.uuid "tagger_id"
     t.string "context", limit: 128
     t.datetime "created_at", precision: nil
     t.string "tenant", limit: 128

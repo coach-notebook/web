@@ -5,16 +5,39 @@ en:
   title: coach_notebook
   minute: minute
   dashboard: Dashboard
+  flash:
+    warning: Something went wrong
+    success: Successful
+  comment:
+    create:
+      success: Created Comment
+  practice:
+    create:
+      success: Created Practice
+  library:
+    create:
+      success: Created Library
+  drill:
+    create:
+      success: Created Drill
+  match:
+    create:
+      success: Created Match
   squad:
     create:
-      success: Successfully Created Squad
+      success: Created Squad
   team:
     squads_empty: No Squads Found
     create:
-      success: Successfully Created Team
+      success: Created Team
   session:
-    new: Sign In
+    new:
+      name: Sign In
+    destroy:
+      name: Sign Out
+      success: Successfully Signed Out
     create:
+      success: Signed In
       failed: Check email address & password
   user:
     new: Sign Up

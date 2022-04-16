@@ -2,7 +2,7 @@
 .page-list
     .page
         .body
-            = render "taggable", taggable: @match
+            = render "tags", taggable: @match
             - unless @match.appearances.empty?
                 .page-item
                     .grid= render @match.appearances

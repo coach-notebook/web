@@ -2,11 +2,12 @@
 #
 # Table name: users
 #
-#  id            :uuid             not null, primary key
-#  email_address :string
-#  name          :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
+#  id              :uuid             not null, primary key
+#  email_address   :string
+#  name            :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  password_digest :string
 #
 class User < ApplicationRecord
   has_many :access_controls

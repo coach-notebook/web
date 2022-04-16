@@ -22,8 +22,8 @@
                     .w-6.h-6= heroicon :user
                 %ul
                     - if current_user
-                        %li= link_to(t("app.profile"), "/profile")
-                        %li= link_to(t("app.settings"), "/settings")
-                        %li= link_to(t("session.destroy"), "/signout")
+                        -# %li= Profile.model_name.human.pluralize, profile_path)
+                        -# %li= Setting.model_name.human.pluralize, setting_path)
+                        %li= link_to(t("session.destroy.name"), "/signout")
                     - unless current_user                        
                         %li= link_to(t("session.create"), "/signin")

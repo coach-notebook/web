@@ -13,7 +13,7 @@ services:
     image: redis:latest
     ports: 
       - "6379:6379"
-  web: 
+  rails: 
     env_file: .env
     build:
       context: .
@@ -31,7 +31,7 @@ services:
     build:
       context: .
     depends_on:
-      - web
+      - rails
       - redis
     volumes:
       - .:/app
@@ -43,21 +43,25 @@ services:
     env_file: .env
     build:
       context: .
+    depends_on:
+      - rails
     volumes:
       - .:/app
       - gem-cache:/usr/local/bundle/gems
       - node-modules:/app/node_modules
-    command: "yarn dev:js  --watch"    
-  css: 
+    command: "yarn dev:js"
+  tailwind: 
     tty: true # https://github.com/evanw/esbuild/issues/1848
     env_file: .env
     build:
       context: .
+    depends_on:
+      - rails
     volumes:
       - .:/app
       - gem-cache:/usr/local/bundle/gems
       - node-modules:/app/node_modules
-    command: "yarn dev:css --watch"
+    command: "yarn dev:css"
 volumes:
   gem-cache: 
   node-modules:

@@ -7,7 +7,6 @@
 #  squad_id    :uuid             not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  review      :string
 #
 class Practice < ApplicationRecord
   include AccessControlled

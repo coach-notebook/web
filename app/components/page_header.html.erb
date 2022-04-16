@@ -16,7 +16,8 @@
         <div class="flashes">
         <% flash.each do |type, msg| %>
             <div class="flash-<%= type %>">
-            <%= msg %>
+            <h2 class="text-xl font-bold"><%= t("flash.#{type}") %></h2>
+            <%= msg.is_a?(Array) ? msg.to_sentence : msg %>
             </div>
         <% end %>
         </div> 

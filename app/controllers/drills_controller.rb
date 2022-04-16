@@ -30,11 +30,11 @@ class DrillsController < ApplicationController
       variations: JSON.parse(safe_params.fetch(:variations, "[]")),
       tags: JSON.parse(safe_params.fetch(:tags, "[]")),
       keys: JSON.parse(safe_params.fetch(:keys, "[]")),
-      goals: JSON.parse(safe_params.fetch(:goals, "[]"))
+      goals: JSON.parse(safe_params.fetch(:goals, "[]")),
     })
     if @drill.valid?
       current_user.access_controls.create(access_controlled: @drill)
-      flash[:success] = t("drill.created")
+      flash[:success] = t("drill.create.success")
       redirect_to @drill
     else
       flash[:warning] = @drill.errors.full_messages
@@ -47,7 +47,7 @@ class DrillsController < ApplicationController
       variations: JSON.parse(safe_params.fetch(:variations, "[]")),
       tags: JSON.parse(safe_params.fetch(:tags, "[]")),
       keys: JSON.parse(safe_params.fetch(:keys, "[]")),
-      goals: JSON.parse(safe_params.fetch(:goals, "[]"))
+      goals: JSON.parse(safe_params.fetch(:goals, "[]")),
     }))
     if @drill.valid?
       redirect_to @drill

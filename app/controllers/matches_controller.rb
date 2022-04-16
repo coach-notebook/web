@@ -28,7 +28,7 @@ class MatchesController < ApplicationController
     @match = Match.create(safe_params)
     if @match.valid?
       current_user.access_controls.create(access_controlled: @match)
-      flash[:success] = t("match.created")
+      flash[:success] = t("match.create.success")
       redirect_to @match
     else
       flash[:warning] = @match.errors.full_messages
@@ -39,7 +39,7 @@ class MatchesController < ApplicationController
   def update
     @match.update(safe_params)
     if @match.valid?
-      flash[:success] = t("match.updated")
+      flash[:success] = t("match.update.success")
       redirect_to @match
     else
       flash[:warning] = @match.errors.full_messages

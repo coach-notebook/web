@@ -3,6 +3,7 @@
 # Table name: drills
 #
 #  id                :uuid             not null, primary key
+#  user_id           :uuid             not null
 #  library_id        :uuid             not null
 #  name              :string
 #  body              :text

@@ -2,8 +2,8 @@
 .page-list
     .page
         .body
-            .page-title= Match.human_attribute_name(:comments) 
-            .page-title= Match.human_attribute_name(:tags) 
+            .tags
+                = render @match.tags
+            = render "comments", commentable: @match
         .sidebar
-            .sidebar-heading= Player.model_name.human.pluralize
             .grid= render @match.players

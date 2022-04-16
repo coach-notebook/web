@@ -1,4 +1,10 @@
 FactoryBot.define do
+  factory :comment do
+    user { nil }
+    body { "MyText" }
+    commentable { nil }
+  end
+
   factory :access_control do
     user { nil }
     access_controlled { nil }
@@ -30,8 +36,9 @@ FactoryBot.define do
   end
 
   factory :user do
-    name { Faker::Name.name }
+    name { Faker::Movies::LordOfTheRings.character }
     email_address { Faker::Internet.free_email }
+    password { "password" }
   end
 
   factory :library do

@@ -15,6 +15,7 @@ class Play < ApplicationRecord
   include AccessControlled
 
   belongs_to :library
+  belongs_to :user
 
   enum court: %i[full half]
 end

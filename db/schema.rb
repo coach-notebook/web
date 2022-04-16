@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_19_000834) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_19_104240) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -35,7 +35,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_19_000834) do
     t.index ["player_id"], name: "index_appearances_on_player_id"
   end
 
+  create_table "comments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.string "commentable_type", null: false
+    t.uuid "commentable_id", null: false
+    t.text "body"
+    t.string "tags", default: [], array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "drills", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
     t.uuid "library_id", null: false
     t.string "name"
     t.text "body"
@@ -48,6 +61,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_19_000834) do
     t.string "keys", array: true
     t.string "goals", array: true
     t.index ["library_id"], name: "index_drills_on_library_id"
+    t.index ["user_id"], name: "index_drills_on_user_id"
   end
 
   create_table "libraries", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -78,6 +92,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_19_000834) do
   end
 
   create_table "plays", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
     t.uuid "library_id"
     t.string "name"
     t.text "notes"
@@ -86,6 +101,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_19_000834) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["library_id"], name: "index_plays_on_library_id"
+    t.index ["user_id"], name: "index_plays_on_user_id"
   end
 
   create_table "practice_drills", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -128,10 +144,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_19_000834) do
 
   create_table "taggings", force: :cascade do |t|
     t.integer "tag_id"
-    t.string "taggable_type"
-    t.integer "taggable_id"
-    t.string "tagger_type"
-    t.integer "tagger_id"
+    t.string "taggable_type", null: false
+    t.uuid "taggable_id", null: false
+    t.string "tagger_type", null: false
+    t.uuid "tagger_id", null: false
     t.string "context", limit: 128
     t.datetime "created_at", precision: nil
     t.string "tenant", limit: 128
@@ -176,10 +192,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_19_000834) do
   add_foreign_key "access_controls", "users"
   add_foreign_key "appearances", "matches"
   add_foreign_key "appearances", "players"
+  add_foreign_key "comments", "users"
   add_foreign_key "drills", "libraries"
+  add_foreign_key "drills", "users"
   add_foreign_key "libraries", "users"
   add_foreign_key "matches", "teams"
   add_foreign_key "plays", "libraries"
+  add_foreign_key "plays", "users"
   add_foreign_key "practice_drills", "drills"
   add_foreign_key "practice_drills", "practices"
   add_foreign_key "practices", "squads"

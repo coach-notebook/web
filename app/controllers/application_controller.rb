@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
   private
 
-def set_practices
+  def set_practices
     @practices = Practice.accessible_to(current_user)
   end
 

@@ -1,0 +1,3 @@
+.grid.comments
+    = render commentable.comments.accessible_to(current_user)
+    = render "comments/new", commentable: commentable

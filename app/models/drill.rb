@@ -18,9 +18,10 @@
 class Drill < ApplicationRecord
   include AccessControlled
 
-  acts_as_taggable_on :tags
+  acts_as_taggable
 
   belongs_to :library
+  belongs_to :user
 
   has_many :practice_drills
 

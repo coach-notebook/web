@@ -13,6 +13,9 @@
 #
 class Match < ApplicationRecord
   include AccessControlled
+  include Commentable
+
+  acts_as_taggable
 
   belongs_to :team
 

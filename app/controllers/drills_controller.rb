@@ -26,6 +26,7 @@ class DrillsController < ApplicationController
 
   def create
     @drill = Drill.create safe_params.merge({
+      user: current_user,
       variations: JSON.parse(safe_params.fetch(:variations, "[]")),
       tags: JSON.parse(safe_params.fetch(:tags, "[]")),
       keys: JSON.parse(safe_params.fetch(:keys, "[]")),

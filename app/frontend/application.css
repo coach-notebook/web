@@ -117,9 +117,7 @@
   .flash-notice {
     @apply bg-sky-100 text-sky-900;
   }
-  .comments {
-    @apply -mx-4 rounded-md bg-neutral-200 p-4 dark:bg-neutral-800;
-  }
+
   .pagination {
     @apply flex items-center justify-between bg-transparent pt-4;
   }
@@ -168,5 +166,29 @@
     background-position: center;
     background-repeat: no-repeat;
     background-color: #1c38c4; */
+  }
+  .comments {
+    @apply gap-6;
+  }
+  .comment {
+    @apply pt-2 text-xl antialiased;
+  }
+  .comment p {
+    @apply mb-1;
+  }
+  .comments form {
+    @apply pt-2;
+  }
+  .comments form .form-input {
+    @apply text-xl;
+  }
+  .comments form label.form-label {
+    @apply hidden;
+  }
+  .comments form div.form-input-wrapper {
+    @apply col-span-3;
+  }
+  .comments form .form-submit {
+    @apply col-span-1 col-start-3;
   }
 }

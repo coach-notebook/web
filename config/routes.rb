@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get "/signout", to: "sessions#destroy", as: :signout
   get "/signup", to: "users#new", as: :signup
 
+  resources :comments, only: [:create, :destroy]
   resources :users, only: [:create, :update, :show]
 
   resources :drills

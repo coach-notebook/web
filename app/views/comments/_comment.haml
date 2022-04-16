@@ -1,0 +1,7 @@
+.comment{id: comment.to_param}
+    = markdown comment.body
+    .byline
+        = Comment.human_attribute_name(:created_at) 
+        = l(comment.created_at.in_time_zone(current_user.try(:timezone,  "Australia/Adelaide")),format: :short)
+        = Comment.human_attribute_name(:user) 
+        = comment.user

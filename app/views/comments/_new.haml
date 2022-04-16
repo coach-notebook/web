@@ -1,0 +1,5 @@
+= form_with model: Comment.new(commentable: commentable), builder: CoachNotebookFormBuilder do |form|
+    = form.hidden_field :commentable_id
+    = form.hidden_field :commentable_type
+    = form.text_area :body
+    = form.submit

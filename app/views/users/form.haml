@@ -1,10 +1,10 @@
-.text-3xl.mb-8= t("session.new")
-= form_tag do
+.text-3xl.mb-8= t("user.create")
+= form_tag "/users" do
     .mb-8.col-span-3
         = label_tag User.human_attribute_name(:email_address), nil, { class: "pl-0 p-1 form-label" }
         = text_field_tag :email_address, '', {class:"form-input text-2xl"}
     .mb-8.col-span-3
         = label_tag User.human_attribute_name(:password), nil, { class: "pl-0 p-1 form-label" }
         = password_field_tag :password, '', {class:"form-input text-2xl"}
-    .col-span-2.col-start-1
-        = submit_tag t("session.new"), { class:"form-submit w-full"}
+    .col-start-1.col-end-2
+        = submit_tag t("user.create"), { class:"form-submit w-full"}

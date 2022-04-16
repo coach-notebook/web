@@ -12,7 +12,10 @@
 #  updated_at :datetime         not null
 #
 class Match < ApplicationRecord
+  include AccessControlled
+
   belongs_to :team
+
   has_many :appearances
   has_many :players, through: :appearances
 end

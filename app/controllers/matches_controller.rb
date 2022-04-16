@@ -1,17 +1,23 @@
 class MatchesController < ApplicationController
   before_action :set_match, only: [:edit, :update, :destroy, :show]
+  before_action :set_teams, only: [:edit, :new, :create, :update]
 
   def safe_params
-    params.require(:match).permit(:name, :squad_id)
+    params.require(:match).permit(:name, :team_id, :played_at, :opposition, :result, :home_team)
   end
 
   def index
-    @pagy, @matches = pagy Match.all
+    @pagy, @matches = pagy Match.accessible_to(current_user)
   end
 
   def new
-    @match = Match.new
-    render template: "matches/form"
+    if @teams.empty?
+      flash[:notice] = t("match.teams_empty")
+      redirect_to new_team_path
+    else
+      @match = Match.new
+      render template: "matches/form"
+    end
   end
 
   def edit
@@ -21,6 +27,7 @@ class MatchesController < ApplicationController
   def create
     @match = Match.create(safe_params)
     if @match.valid?
+      current_user.access_controls.create(access_controlled: @match)
       flash[:success] = t("match.created")
       redirect_to @match
     else
@@ -51,7 +58,7 @@ class MatchesController < ApplicationController
   end
 
   def set_match
-    @match = Match.find_by(id: params[:id])
+    @match = Match.accessible_to(current_user).find_by(id: params[:id])
     fail ActiveRecord::RecordNotFound unless @match
   end
 end

@@ -12,6 +12,8 @@
 #  updated_at :datetime         not null
 #
 class Play < ApplicationRecord
+  include AccessControlled
+
   belongs_to :library
 
   enum court: %i[full half]

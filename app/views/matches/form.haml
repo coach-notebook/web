@@ -1,6 +1,6 @@
 = render PageHeader.new(title: Match.model_name.human) 
 = form_with model: @match, builder: CoachNotebookFormBuilder do |form|
-    = form.select :team_id, Team.all.map{|team| [team.name, team.id]}
+    = form.select :team_id, Team.accessible_to(current_user).map{|team| [team.name, team.id]}
     = form.datetime_field :played_at
     = form.text_field :opposition
     = form.text_field :result 

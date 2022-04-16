@@ -6,7 +6,7 @@ class SquadsController < ApplicationController
   end
 
   def index
-    @pagy, @squads = pagy Squad.all
+    @pagy, @squads = pagy Squad.accessible_to(current_user)
   end
 
   def new
@@ -19,8 +19,9 @@ class SquadsController < ApplicationController
   end
 
   def create
-    @squad = Squad.create(safe_params.merge(active: true, user: current_user))
+    @squad = Squad.create(safe_params.merge(user: current_user))
     if @squad.valid?
+      current_user.access_controls.create(access_controlled: @squad)
       flash[:success] = t("squad.created")
       redirect_to @squad
     else
@@ -50,7 +51,7 @@ class SquadsController < ApplicationController
   end
 
   def set_squad
-    @squad = Squad.find_by(id: params[:id], user: current_user)
+    @squad = Squad.accessible_to(current_user).find_by(id: params[:id])
     fail ActiveRecord::RecordNotFound unless @squad
   end
 end

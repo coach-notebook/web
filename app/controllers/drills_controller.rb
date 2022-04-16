@@ -1,17 +1,23 @@
 class DrillsController < ApplicationController
-  before_action :set_drill, only: [:show, :edit, :destroy]
+  before_action :set_drill, only: [:show, :edit, :update, :destroy]
+  before_action :set_libraries, only: [:edit, :new, :create, :update]
 
   def safe_params
     params.require(:drill).permit(:name, :body, :duration_minutes, :library_id, :tags, :keys, :goals, :variations, :number_of_players)
   end
 
   def index
-    @pagy, @drills = pagy Drill.all
+    @pagy, @drills = pagy Drill.accessible_to(current_user)
   end
 
   def new
-    @drill = Drill.new(library_id: params[:library_id])
-    render template: "drills/form"
+    if @libraries.empty?
+      flash[:notice] = t("drill.libraries_empty")
+      redirect_to new_library_path
+    else
+      @drill = Drill.new
+      render template: "drills/form"
+    end
   end
 
   def edit
@@ -23,9 +29,10 @@ class DrillsController < ApplicationController
       variations: JSON.parse(safe_params.fetch(:variations, "[]")),
       tags: JSON.parse(safe_params.fetch(:tags, "[]")),
       keys: JSON.parse(safe_params.fetch(:keys, "[]")),
-      goals: JSON.parse(safe_params.fetch(:goals, "[]"))
+      goals: JSON.parse(safe_params.fetch(:goals, "[]")),
     })
     if @drill.valid?
+      current_user.access_controls.create(access_controlled: @drill)
       flash[:success] = t("drill.created")
       redirect_to @drill
     else
@@ -35,7 +42,12 @@ class DrillsController < ApplicationController
   end
 
   def update
-    @drill.update(safe_params)
+    @drill.update(safe_params.merge({
+      variations: JSON.parse(safe_params.fetch(:variations, "[]")),
+      tags: JSON.parse(safe_params.fetch(:tags, "[]")),
+      keys: JSON.parse(safe_params.fetch(:keys, "[]")),
+      goals: JSON.parse(safe_params.fetch(:goals, "[]")),
+    }))
     if @drill.valid?
       redirect_to @drill
     else
@@ -45,6 +57,7 @@ class DrillsController < ApplicationController
   end
 
   def set_drill
-    @drill = Drill.find_by(id: params[:id], library: current_user.libraries)
+    @drill = Drill.accessible_to(current_user).find_by(id: params[:id])
+    fail ActiveRecord::RecordNotFound unless @drill
   end
 end

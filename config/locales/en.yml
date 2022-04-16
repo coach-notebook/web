@@ -2,8 +2,13 @@ en:
   hello: "Hello world"
   title: coach_notebook
   minute: minute
+  dashboard: Dashboard
   session:
     new: Sign In
+    create:
+      failed: Check email address & password
+  user:
+    create: Sign Up
   time:
     formats:
       day_date: "%A, %-d %B"

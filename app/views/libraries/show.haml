@@ -2,9 +2,9 @@
     = link_to t("library.edit"), edit_library_path(@library), class: 'btn-secondary'
     = link_to t("drill.new"), new_library_drills_path(@library), class: 'btn-primary'
 .page
+    .body
+        .gridx4= render @library.drills.accessible_to(current_user)
     .sidebar
         = markdown @library.notes
         .byline
             = [@library.user, l(@library.created_at, format: :day_date)].join(" | ")
-    .body
-        .gridx4= render @library.drills

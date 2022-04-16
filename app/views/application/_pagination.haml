@@ -1,11 +1,12 @@
 - link = pagy_link_proc(@pagy)
-%nav.pagination
-    .-mt-px.w-0.flex-1.flex
-        = link.call(@pagy.prev, pagy_t('pagy.nav.prev'), 'aria-label="previous" class="pagination-button"').html_safe
-    %ul.hidden.md:-mt-px.md:flex.pagination-items
-        - @pagy.series.each do |item|
-            = content_tag(:li, link.call(item).html_safe, class: "pagination-item") if item.is_a?(Integer)
-            = content_tag(:li, link.call(item).html_safe, class: "pagination-item pagination-active") if item.is_a?(String)
-            = content_tag(:li, link.call(item).html_safe, class: "pagination-item pagination-disabled") if item == :gap 
-    .-mt-px.w-0.flex-1.flex.justify-end
-        = link.call(@pagy.next, pagy_t('pagy.nav.next'), 'aria-label="next" class="pagination-button"').html_safe
+- if @pagy.next || @pagy.prev
+    %nav.pagination
+        .-mt-px.w-0.flex-1.flex
+            = link.call(@pagy.prev, pagy_t('pagy.nav.prev'), 'aria-label="previous" class="pagination-button"').html_safe
+        %ul.hidden.md:-mt-px.md:flex.pagination-items
+            - @pagy.series.each do |item|
+                = content_tag(:li, link.call(item).html_safe, class: "pagination-item") if item.is_a?(Integer)
+                = content_tag(:li, link.call(item).html_safe, class: "pagination-item pagination-active") if item.is_a?(String)
+                = content_tag(:li, link.call(item).html_safe, class: "pagination-item pagination-disabled") if item == :gap 
+        .-mt-px.w-0.flex-1.flex.justify-end
+            = link.call(@pagy.next, pagy_t('pagy.nav.next'), 'aria-label="next" class="pagination-button"').html_safe

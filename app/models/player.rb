@@ -9,6 +9,8 @@
 #  team_id    :uuid
 #
 class Player < ApplicationRecord
+  include AccessControlled
+
   belongs_to :team
   has_many :appearances
   has_many :matches, through: :appearances

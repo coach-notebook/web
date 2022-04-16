@@ -1,17 +1,32 @@
 class PracticesController < ApplicationController
   before_action :set_practice, only: [:edit, :update, :destroy, :show, :add_drill, :remote_drive]
+  before_action :set_practices, only: [:edit, :new, :create, :update]
+  before_action :set_libraries, only: [:edit, :new, :create, :update]
+  before_action :set_drills, only: [:edit, :new, :create, :update, :show]
+  before_action :set_squads, only: [:edit, :new, :create, :update]
 
   def safe_params
     params.require(:practice).permit(:practice_at, :copy_practice_id, :squad_id)
   end
 
   def index
-    @pagy, @practices = pagy Practice.all
+    @pagy, @practices = pagy Practice.accessible_to(current_user)
   end
 
   def new
-    @practice = Practice.new
-    render template: "practices/form"
+    if @libraries.empty?
+      flash[:notice] = t("practice.libraries_empty")
+      redirect_to new_library_path
+    elsif @squads.empty?
+      flash[:notice] = t("practice.squads_empty")
+      redirect_to new_squad_path
+    elsif @drills.empty?
+      flash[:notice] = t("practice.drills_empty")
+      redirect_to new_drill_path
+    else
+      @practice = Practice.new
+      render template: "practices/form"
+    end
   end
 
   def edit
@@ -20,9 +35,10 @@ class PracticesController < ApplicationController
 
   def create
     @practice = Practice.create(practice_at: safe_params[:practice_at], squad_id: safe_params[:squad_id])
-    @practice.copy_drills_from(safe_params[:copy_practice_id])
     if @practice.valid?
-      flash[:success] = t("squad.created")
+      @practice.copy_drills_from(safe_params[:copy_practice_id])
+      current_user.access_controls.create(access_controlled: @practice)
+      flash[:success] = t("practice.created")
       redirect_to @practice
     else
       flash[:warning] = @practice.errors.full_messages
@@ -33,7 +49,7 @@ class PracticesController < ApplicationController
   def update
     @practice.update(safe_params)
     if @practice.valid?
-      flash[:success] = t("squad.updated")
+      flash[:success] = t("practice.updated")
       redirect_to @practice
     else
       flash[:warning] = @practice.errors.full_messages
@@ -62,7 +78,7 @@ class PracticesController < ApplicationController
   end
 
   def set_practice
-    @practice = Practice.find_by(id: params[:id])
+    @practice = Practice.accessible_to(current_user).find_by(id: params[:id])
     fail ActiveRecord::RecordNotFound unless @practice
   end
 end

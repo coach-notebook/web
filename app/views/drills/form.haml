@@ -1,6 +1,6 @@
 = render PageHeader.new(title: Drill.model_name.human)     
 = form_with model: @drill, builder: CoachNotebookFormBuilder do |form|
-    = form.select :library_id, Library.all.map{|l| [l.name, l.id]}
+    = form.select :library_id, @libraries.map{|l| [l.name, l.id]}
     = form.text_field :name
     = form.text_area :body
     = form.tag_field :variations

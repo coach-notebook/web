@@ -11,14 +11,14 @@ class SessionsController < ApplicationController
         redirect_to root_path, notice: t("session.create.success")
       end
     else
-      flash[:warning] = t("session.failed")
+      flash[:warning] = t("session.create.failed")
       render template: "sessions/form"
     end
   end
 
   def destroy
     session[:token] = nil
-    redirect_to root_path, notice: t("session.destroy.success")
+    redirect_to signin_path, notice: t("session.destroy.success")
   end
 
   def safe_params

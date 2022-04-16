@@ -1,5 +1,4 @@
-= render PageHeader.new(title: l(@practice.practice_at, format: :day_date), subtitle: [@practice.squad.name, @practice.squad.season, @practice.squad.competition]) do 
-    = render Rating.new(rating: @practice.rating) if @practice.past?
+= render PageHeader.new(title: l(@practice.practice_at, format: :day_date), subtitle: [@practice.squad.competition, @practice.squad.season, @practice.squad.name])
 .page-list
     - @practice.practice_drills.order(:position).each do |practice_drill| 
         .page
@@ -18,7 +17,8 @@
                 - if practice_drill.drill.keys?
                     .text-xs.text-slate-500= Drill.human_attribute_name(:keys) 
                     .text-sm= practice_drill.drill.keys.to_sentence
+                    
     - unless @practice.past?
         = form_tag "/practices/#{@practice.id}/drills", builder: CoachNotebookFormBuilder do
-            = select_tag :drill_id, options_from_collection_for_select(current_user.drills, :id, :name), class: "form-input"
+            = select_tag :drill_id, options_from_collection_for_select(@drills, :id, :name), class: "form-input"
             = submit_tag t("drill.new"), class: "btn-primary"

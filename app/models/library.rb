@@ -10,6 +10,8 @@
 #  updated_at :datetime         not null
 #
 class Library < ApplicationRecord
+  include AccessControlled
+
   belongs_to :user
 
   has_many :plays

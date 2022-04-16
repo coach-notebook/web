@@ -22,13 +22,13 @@
     @apply width  flex-1 pb-32;
   }
   footer {
-    @apply bottom-0 w-full bg-neutral-100 p-16 text-neutral-400;
+    @apply bottom-0 w-full bg-neutral-100 p-16 text-neutral-400 dark:bg-neutral-800;
   }
   .nav-button {
     @apply rounded-md py-2 px-3 text-sm font-medium text-neutral-800 hover:bg-neutral-500 hover:bg-opacity-75 dark:text-neutral-300;
   }
   .width {
-    @apply mx-auto w-full p-2 md:max-w-6xl md:p-0;
+    @apply mx-auto w-full p-4 md:max-w-6xl md:p-4 lg:p-4 2xl:p-0;
   }
   .sidebar-heading {
     @apply text-lg font-medium text-neutral-700 dark:text-neutral-300;
@@ -94,10 +94,10 @@
     @apply flex-shrink-0 rounded-full  p-1 text-neutral-400 hover:text-neutral-900 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-neutral-600;
   }
   .menu > ul {
-    @apply absolute right-0 top-8 mt-2 hidden w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5  focus:outline-none;
+    @apply absolute right-0 top-8 mt-2 hidden w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none  dark:bg-neutral-600;
   }
   .menu > ul > li a {
-    @apply block py-2 px-4 text-sm text-neutral-700 hover:bg-sky-100;
+    @apply block py-2 px-4 text-sm text-neutral-700 hover:bg-sky-100 hover:bg-sky-900 dark:text-neutral-200 dark:text-neutral-200;
   }
   .menu:hover > ul {
     @apply block;
@@ -136,7 +136,7 @@
     @apply rounded dark:bg-neutral-700 dark:text-neutral-300;
   }
   form {
-    @apply grid grid-cols-1 items-start text-neutral-700 dark:text-neutral-400 md:grid-cols-3 md:p-4 lg:p-0;
+    @apply grid grid-cols-1 items-start text-neutral-700 dark:text-neutral-400 md:grid-cols-3;
   }
   .form-label {
     @apply block p-0 text-xl md:col-span-3 md:col-start-1 md:col-end-2 md:py-6;
@@ -145,13 +145,13 @@
     @apply col-span-3 col-start-1 py-4 md:col-span-2 md:col-start-2;
   }
   .form-input {
-    @apply col-span-2 col-start-2 w-full rounded border-neutral-300 p-4 shadow ring-neutral-100  focus:ring-sky-200 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200;
+    @apply col-span-2 col-start-2 w-full rounded-2xl border-neutral-300 p-4 shadow ring-neutral-100  focus:ring-sky-200 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200;
   }
   textarea.form-input {
     @apply h-80;
   }
   .form-submit {
-    @apply w-full place-content-end rounded-md bg-sky-400 p-4 text-neutral-700 md:col-start-2;
+    @apply w-full place-content-end rounded-2xl bg-sky-400 p-4 text-xl text-neutral-100 md:col-start-2;
   }
   .form-input-tag {
     @apply mb-2;
@@ -163,10 +163,10 @@
     @apply flex-1;
   }
   body.sessions {
-    background-image: url("assets/sessions-background.png");
+    /* background-image: url("assets/sessions-background.png");
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
-    background-color: #1c38c4;
+    background-color: #1c38c4; */
   }
 }

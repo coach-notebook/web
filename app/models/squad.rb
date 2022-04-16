@@ -12,13 +12,15 @@
 #  updated_at  :datetime         not null
 #
 class Squad < ApplicationRecord
+  include AccessControlled
+
+  belongs_to :user
+
   has_many :libraries
   has_many :players
   has_many :practices
   has_many :teams
   has_many :matches, through: :teams
-
-  belongs_to :user
 
   validates :name, presence: true
 

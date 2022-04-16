@@ -1,4 +1,9 @@
 FactoryBot.define do
+  factory :access_control do
+    user { nil }
+    access_controlled { nil }
+  end
+
   factory :appearance do
     player { nil }
     match { nil }

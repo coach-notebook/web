@@ -10,6 +10,8 @@
 #  review      :string
 #
 class Practice < ApplicationRecord
+  include AccessControlled
+
   belongs_to :squad
   has_many :practice_drills
   has_many :drills, through: :practice_drills

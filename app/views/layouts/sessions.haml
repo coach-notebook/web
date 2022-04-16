@@ -13,9 +13,13 @@
   %body.sessions
     .grid.grid-cols-3.grid-rows-3.gap-2.w-screen.h-screen
       .row-start-2.col-start-2.col-end-2.align-middle
-        .shadow.p-12.rounded-lg.bg-neutral-100
+        .shadow.px-12.py-16.rounded-2xl.bg-neutral-100.dark:bg-neutral-800
           - unless flash.empty?
             .flashes
               - flash.each do |type, message| 
-                %div{ class: type}= message
-          = yield 
+                %div{ class: "flash-#{type}"}= message
+          = yield
+
+          .flash-notice
+          .flash-warning
+          .flash-success

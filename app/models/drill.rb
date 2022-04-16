@@ -16,19 +16,22 @@
 #  goals             :string           is an Array
 #
 class Drill < ApplicationRecord
+  include AccessControlled
+
   acts_as_taggable_on :tags
 
   belongs_to :library
+
   has_many :practice_drills
 
   def self.tags
     ["mid-range-shot",
-      "attacking-the-basket",
-      "one-on-one-defence",
-      "overplay",
-      "defensive-slides",
-      "quick-feet",
-      "court-speed",
-      "handles"]
+     "attacking-the-basket",
+     "one-on-one-defence",
+     "overplay",
+     "defensive-slides",
+     "quick-feet",
+     "court-speed",
+     "handles"]
   end
 end

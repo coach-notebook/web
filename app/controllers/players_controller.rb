@@ -41,6 +41,7 @@ class PlayersController < ApplicationController
   end
 
   def set_player
-    @player = Player.find_by(id: params[:id])
+    @player = Player.accessible_to(current_user).find_by(id: params[:id])
+    fail ActiveRecord::RecordNotFound unless @player
   end
 end

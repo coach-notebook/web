@@ -1,12 +1,23 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-export const TagField = ({ name }: { name?: string | null }) => {
+export const TagField = ({
+  name,
+  values,
+}: {
+  name?: string | null;
+  values: string[];
+}) => {
   const [tags, setTags] = useState<String[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
+  const hiddenInputRef = useRef<HTMLInputElement>(null);
 
   if (!name) {
     return null;
   }
+
+  useEffect(() => {
+    setTags(values);
+  }, [hiddenInputRef]);
 
   const onRemoveTag = (index: number) => {
     const t = tags;
@@ -30,7 +41,12 @@ export const TagField = ({ name }: { name?: string | null }) => {
 
   return (
     <>
-      <input type="hidden" name={name} value={JSON.stringify(tags)} />
+      <input
+        type="hidden"
+        ref={hiddenInputRef}
+        name={name}
+        value={JSON.stringify(tags)}
+      />
       <input
         autoComplete="off"
         className="form-input-tag form-input"

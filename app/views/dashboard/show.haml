@@ -2,5 +2,7 @@
 .page-list{"data-controller": "dashboard"}
     .page-item
         .page-title= Match.model_name.human.pluralize
+        .gridx4= render @matches
     .page-item
         .page-title= Practice.model_name.human.pluralize
+        .gridx4= render @practices

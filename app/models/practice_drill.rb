@@ -11,6 +11,8 @@
 #  rating      :integer          default(0)
 #
 class PracticeDrill < ApplicationRecord
+  include AccessControlled
+
   belongs_to :practice
   belongs_to :drill
 end

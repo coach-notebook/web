@@ -8,4 +8,26 @@ class ApplicationController < ActionController::Base
   rescue
     false
   end
+
+  private
+
+def set_practices
+    @practices = Practice.accessible_to(current_user)
+  end
+
+  def set_squads
+    @squads = Squad.accessible_to(current_user)
+  end
+
+  def set_libraries
+    @libraries = Library.accessible_to(current_user)
+  end
+
+  def set_teams
+    @teams = Team.accessible_to(current_user)
+  end
+
+  def set_drills
+    @drills = Drill.accessible_to(current_user)
+  end
 end

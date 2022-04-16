@@ -1,4 +1,5 @@
 class MatchesController < ApplicationController
+  before_action :ensure_enabled
   before_action :set_match, only: [:edit, :update, :destroy, :show]
   before_action :set_teams, only: [:edit, :new, :create, :update]
 
@@ -59,5 +60,9 @@ class MatchesController < ApplicationController
   def set_match
     @match = Match.accessible_to(current_user).find_by(id: params[:id])
     fail ActiveRecord::RecordNotFound unless @match
+  end
+
+  def ensure_enabled
+    render :not_found unless Flipper.enabled?(:matches, current_user)
   end
 end

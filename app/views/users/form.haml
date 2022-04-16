@@ -1,5 +1,5 @@
 .text-3xl.mb-8= t("user.new")
-= form_tag "/users" do
+= form_tag do
     .mb-8.col-span-3
         = label_tag User.human_attribute_name(:email_address), nil, { class: "pl-0 p-1 form-label" }
         = text_field_tag :email_address, '', {class:"form-input text-2xl"}

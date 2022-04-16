@@ -1,4 +1,5 @@
 class DrillsController < ApplicationController
+  before_action :ensure_enabled
   before_action :set_drill, only: [:show, :edit, :update, :destroy]
   before_action :set_libraries, only: [:edit, :new, :create, :update]
 
@@ -57,8 +58,14 @@ class DrillsController < ApplicationController
     end
   end
 
+  private
+
   def set_drill
     @drill = Drill.accessible_to(current_user).find_by(id: params[:id])
     fail ActiveRecord::RecordNotFound unless @drill
+  end
+
+  def ensure_enabled
+    render :not_found unless Flipper.enabled?(:drills, current_user)
   end
 end

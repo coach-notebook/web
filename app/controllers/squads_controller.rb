@@ -1,4 +1,5 @@
 class SquadsController < ApplicationController
+  before_action :ensure_enabled
   before_action :set_squad, only: [:edit, :update, :show, :destroy]
 
   def safe_params
@@ -49,8 +50,14 @@ class SquadsController < ApplicationController
     redirect_to squads_path
   end
 
+  protected
+
   def set_squad
     @squad = Squad.accessible_to(current_user).find_by(id: params[:id])
     fail ActiveRecord::RecordNotFound unless @squad
+  end
+
+  def ensure_enabled
+    render :not_found unless Flipper.enabled?(:matches, current_user) || Flipper.enabled?(:drills, current_user)
   end
 end

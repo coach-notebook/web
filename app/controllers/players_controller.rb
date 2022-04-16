@@ -1,4 +1,5 @@
 class PlayersController < ApplicationController
+  before_action :ensure_enabled
   before_action :set_player
 
   def safe_params
@@ -40,8 +41,14 @@ class PlayersController < ApplicationController
     end
   end
 
+  protected
+
   def set_player
     @player = Player.accessible_to(current_user).find_by(id: params[:id])
     fail ActiveRecord::RecordNotFound unless @player
+  end
+
+  def ensure_enabled
+    render :not_found unless Flipper.enabled?(:matches, current_user)
   end
 end

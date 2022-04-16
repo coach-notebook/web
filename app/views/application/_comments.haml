@@ -1,5 +1,6 @@
-.page-item.comments
-    .page-title= Comment.model_name.human.pluralize
-    .grid
-        = render commentable.comments.accessible_to(current_user)
-        = render "comments/new", commentable: commentable
+- if Flipper.enabled?(:comments, current_user)
+    .page-item.comments
+        .page-title= Comment.model_name.human.pluralize
+        .grid
+            = render commentable.comments.accessible_to(current_user)
+            = render "comments/new", commentable: commentable

@@ -1,4 +1,5 @@
 class LibrariesController < ApplicationController
+  before_action :ensure_enabled
   before_action :set_library, only: [:show, :update, :edit, :destory]
 
   def safe_params
@@ -41,8 +42,14 @@ class LibrariesController < ApplicationController
     end
   end
 
+  protected
+
   def set_library
     @library = Library.accessible_to(current_user).find_by(id: params[:id])
     fail ActiveRecord::RecordNotFound unless @library
+  end
+
+  def ensure_enabled
+    render :not_found unless Flipper.enabled?(:drills, current_user)
   end
 end

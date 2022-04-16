@@ -1,4 +1,5 @@
 class PracticesController < ApplicationController
+  before_action :ensure_enabled
   before_action :set_practice, only: [:edit, :update, :destroy, :show, :add_drill, :remote_drive]
   before_action :set_practices, only: [:edit, :new, :create, :update]
   before_action :set_libraries, only: [:edit, :new, :create, :update]
@@ -76,8 +77,14 @@ class PracticesController < ApplicationController
     redirect_to practice_path(@practice)
   end
 
+  protected
+
   def set_practice
     @practice = Practice.accessible_to(current_user).find_by(id: params[:id])
     fail ActiveRecord::RecordNotFound unless @practice
+  end
+
+  def ensure_enabled
+    render :not_found unless Flipper.enabled?(:drills, current_user)
   end
 end

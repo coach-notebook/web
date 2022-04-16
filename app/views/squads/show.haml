@@ -1,15 +1,17 @@
 = render PageHeader.new(title: @squad.name, subtitle: [@squad.season, @squad.competition]) do 
     = link_to(t("squad.edit"), edit_squad_path(@squad), class: "btn-primary")
 .page-list    
-    .page-item
-        .page-title= Practice.model_name.human.pluralize
-        .gridx4
-            = render @squad.practices.accessible_to(current_user).order(:practice_at).where('practice_at > ?', Time.now)
-            = link_to new_practice_path(squad_id: @squad), class: [:cell, :new] do 
-                .cell-body= t("drill.new")
-    .page-item
-        .page-title= Team.model_name.human.pluralize
-        .gridx4
-            = render @squad.teams.accessible_to(current_user)
-            = link_to new_team_path(squad_squad_id: @squad), class: [:cell, :new] do 
-                .cell-body= t("team.new")
+    - if Flipper.enabled?(:drills, current_user)
+        .page-item
+            .page-title= Practice.model_name.human.pluralize
+            .gridx4
+                = render @squad.practices.accessible_to(current_user).order(:practice_at).where('practice_at > ?', Time.now)
+                = link_to new_practice_path(squad_id: @squad), class: [:cell, :new] do 
+                    .cell-body= t("drill.new")
+    - if Flipper.enabled?(:matches, current_user)
+        .page-item
+            .page-title= Team.model_name.human.pluralize
+            .gridx4
+                = render @squad.teams.accessible_to(current_user)
+                = link_to new_team_path(squad_squad_id: @squad), class: [:cell, :new] do 
+                    .cell-body= t("team.new")

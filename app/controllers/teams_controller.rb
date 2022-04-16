@@ -1,4 +1,5 @@
 class TeamsController < ApplicationController
+  before_action :ensure_enabled
   before_action :set_team, only: [:edit, :update, :destroy, :show]
   before_action :set_squads, only: [:edit, :new, :create, :update]
 
@@ -56,8 +57,14 @@ class TeamsController < ApplicationController
     redirect_to teams_path
   end
 
+  protected
+
   def set_team
     @team = Team.accessible_to(current_user).find_by(id: params[:id])
     fail ActiveRecord::RecordNotFound unless @team
+  end
+
+  def ensure_enabled
+    render :not_found unless Flipper.enabled?(:matches, current_user)
   end
 end

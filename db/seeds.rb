@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 user = FactoryBot.create(:user, email_address: "alice@example.com", password: "password")
+Flipper.enable(:drills, User.first)
+Flipper.enable(:matches, User.first)
 FactoryBot.create_list(:library_with_plays_and_drills, 5, user: user)
 FactoryBot.create_list(:squad_with_teams, 3, user: user)
 Squad.all.each do |squad|

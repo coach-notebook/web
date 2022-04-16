@@ -3,15 +3,18 @@
         .flex.items-center.gap-2
             - if current_user
                 = link_to t("dashboard"), root_path, class: "nav-button"
-                = link_to Library.model_name.human.pluralize, libraries_path, class: "nav-button"
-                = link_to Practice.model_name.human.pluralize, practices_path, class: "nav-button"
-                = link_to Drill.model_name.human.pluralize, drills_path, class: "nav-button"
-                = link_to Squad.model_name.human.pluralize, squads_path, class: "nav-button"
-                = link_to Team.model_name.human.pluralize, teams_path, class: "nav-button"
-                = link_to Match.model_name.human.pluralize, matches_path, class: "nav-button"
+                - if Flipper.enabled?(:drills, current_user)
+                    = link_to Library.model_name.human.pluralize, libraries_path, class: "nav-button"
+                    = link_to Practice.model_name.human.pluralize, practices_path, class: "nav-button"
+                    = link_to Drill.model_name.human.pluralize, drills_path, class: "nav-button"
+                - if Flipper.enabled?(:matches, current_user) || Flipper.enabled?(:drills, current_user)
+                    = link_to Squad.model_name.human.pluralize, squads_path, class: "nav-button"
+                - if Flipper.enabled?(:matches, current_user)                    
+                    = link_to Team.model_name.human.pluralize, teams_path, class: "nav-button"
+                    = link_to Match.model_name.human.pluralize, matches_path, class: "nav-button"
     .hidden.md:block.justify-end
         .flex.items-center.gap-2
-            - if current_user
+            - if current_user && Flipper.enabled?(:notifications, current_user)
                 .notfications
                     %button{type:"button"}
                         .sr-only View notifications 

@@ -42,6 +42,7 @@ en:
   user:
     new: Sign Up
     create:
+      name: Sign Up
       success: Successful Sign Up
   time:
     formats:

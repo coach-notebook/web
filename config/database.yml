@@ -33,4 +33,5 @@ test:
   database: <%= ENV['PG_DATABASE'] %>_test
 
 production:
+  <<: *default
   database: <%= ENV['PG_DATABASE'] %>

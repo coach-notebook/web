@@ -4,7 +4,7 @@ require("esbuild")
     absWorkingDir: path.join(process.cwd(), "app/frontend"),
     bundle: true,
     tsconfig: path.join(process.cwd(), "tsconfig.json"),
-    entryPoints: ["application.tsx"],-
+    entryPoints: ["application.tsx"],
     logLevel: "info",
     banner: { js: "// build with esbuild" },
     minify: true,

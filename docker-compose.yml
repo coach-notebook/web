@@ -13,7 +13,7 @@ services:
     image: redis:latest
     ports: 
       - "6379:6379"
-  rails: 
+  web: 
     env_file: .env
     build:
       context: .
@@ -31,7 +31,7 @@ services:
     build:
       context: .
     depends_on:
-      - rails
+      - app
       - redis
     volumes:
       - .:/app

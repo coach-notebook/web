@@ -31,7 +31,7 @@ services:
     build:
       context: .
     depends_on:
-      - app
+      - web
       - redis
     volumes:
       - .:/app
@@ -47,7 +47,7 @@ services:
       - .:/app
       - gem-cache:/usr/local/bundle/gems
       - node-modules:/app/node_modules
-    command: "yarn tailwind build --watch --config ./config/tailwind.config.js --input ./app/assets/stylesheets/application.css --output ./app/assets/builds/application.css"
+    command: "yarn tailwind build --watch --config ./tailwind.config.js --input ./app/frontend/entrypoints/application.css --output ./app/assets/builds/application.css"
 volumes:
   gem-cache: 
   node-modules:

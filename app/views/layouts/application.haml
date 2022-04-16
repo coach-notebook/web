@@ -8,10 +8,8 @@
     %link{ rel: "stylesheet", href: "//fonts.googleapis.com/css2?family=Anek+Tamil:wght@100;400;700&display=swap" }
     = csrf_meta_tags
     = csp_meta_tag
-    = vite_client_tag
-    = vite_typescript_tag "application"
-    = vite_stylesheet_tag "application"
-    = vite_react_refresh_tag  
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = javascript_include_tag "application", "data-turbo-track": "reload", defer: true 
   %body
     .pb-32
       = render "navigation"

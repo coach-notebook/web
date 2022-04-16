@@ -21,7 +21,7 @@ default: &default
   password: <%= ENV['PG_PASSWORD'] %>
   port: <%= ENV['PG_PORT'] || '5432' %>
   host: <%= ENV['PG_HOST'] %>
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 5) %>
   timeout: 5000
 
 development:
@@ -34,6 +34,4 @@ test:
 
 production:
   <<: *default
-  database: <%= ENV['PG_DATABASE'] %>
-  username: rails_template
-  password: <%= ENV["RAILS_TEMPLATE_PG_PASSWORD"] %>
+  database: <%= ENV['PG_DATABASE'] %>_production

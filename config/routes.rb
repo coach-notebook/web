@@ -13,17 +13,17 @@ Rails.application.routes.draw do
   get "/signup", to: "users#new", as: :signup
 
   resources :comments, only: [:create, :destroy]
-  resources :users, only: [:create, :update, :show]
-
   resources :drills
+  resources :matches
+  resources :players
   resources :practices
   resources :teams
-  resources :players
-  resources :matches
+  resources :users, only: [:create, :update, :show]
 
   resources :squads do
     resources :players
   end
+
   resources :libraries do
     resource :drills
   end

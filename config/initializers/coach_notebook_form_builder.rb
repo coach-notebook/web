@@ -1,22 +1,22 @@
 class CoachNotebookFormBuilder < ActionView::Helpers::FormBuilder
   def tag_field(method, options = {})
     label_text = options.fetch(:label, method.to_s.humanize)
-    label_options = options.fetch(:label_options, {class: "form-label"})
+    label_options = options.fetch(:label_options, { class: "form-label" })
 
-    input_defaults = {"data-tag_field": field_id(@object_name, method)}
+    input_defaults = { "data-tag_field": field_id(@object_name, method) }
 
     @template.label(@object_name, method, label_text, label_options) +
       @template.content_tag(:div, class: "form-input-wrapper") do
-        @template.hidden_field_tag(method, object.send(method).to_s, input_defaults) +
+        @template.hidden_field_tag(field_name(method), object.send(method).to_s, input_defaults) +
           @template.text_field_tag(field_id(@object_name, method) + "_tag", "", class: "form-input")
       end
   end
 
   def password_field(method, options = {})
     label_text = options.fetch(:label, method.to_s.humanize)
-    label_options = options.fetch(:label_options, {class: "form-label"})
+    label_options = options.fetch(:label_options, { class: "form-label" })
 
-    input_defaults = {class: "form-input"}
+    input_defaults = { class: "form-input" }
     input_options = merge_options(input_defaults, options.fetch(:input_options, {}))
 
     @template.label(@object_name, method, label_text, label_options) +
@@ -27,9 +27,9 @@ class CoachNotebookFormBuilder < ActionView::Helpers::FormBuilder
 
   def text_field(method, options = {})
     label_text = options.fetch(:label, method.to_s.humanize)
-    label_options = options.fetch(:label_options, {class: "form-label"})
+    label_options = options.fetch(:label_options, { class: "form-label" })
 
-    input_defaults = {class: "form-input"}
+    input_defaults = { class: "form-input" }
     input_options = merge_options(input_defaults, options.fetch(:input_options, {}))
 
     @template.label(@object_name, method, label_text, label_options) +
@@ -40,9 +40,9 @@ class CoachNotebookFormBuilder < ActionView::Helpers::FormBuilder
 
   def date_field(method, options = {})
     label_text = options.fetch(:label, method.to_s.humanize)
-    label_options = options.fetch(:label_options, {class: "form-label"})
+    label_options = options.fetch(:label_options, { class: "form-label" })
 
-    input_defaults = {class: "form-input"}
+    input_defaults = { class: "form-input" }
     input_options = merge_options(input_defaults, options.fetch(:input_options, {}))
 
     @template.label(@object_name, method, label_text, label_options) +
@@ -53,9 +53,9 @@ class CoachNotebookFormBuilder < ActionView::Helpers::FormBuilder
 
   def datetime_field(method, options = {})
     label_text = options.fetch(:label, method.to_s.humanize)
-    label_options = options.fetch(:label_options, {class: "form-label"})
+    label_options = options.fetch(:label_options, { class: "form-label" })
 
-    input_defaults = {class: "form-input"}
+    input_defaults = { class: "form-input" }
     input_options = merge_options(input_defaults, options.fetch(:input_options, {}))
 
     @template.label(@object_name, method, label_text, label_options) +
@@ -66,9 +66,9 @@ class CoachNotebookFormBuilder < ActionView::Helpers::FormBuilder
 
   def select(method, choices, options = {})
     label_text = options.fetch(:label, method.to_s.humanize)
-    label_options = options.fetch(:label_options, {class: "form-label"})
+    label_options = options.fetch(:label_options, { class: "form-label" })
 
-    input_defaults = {class: "form-input"}
+    input_defaults = { class: "form-input" }
     input_options = merge_options(input_defaults, options.fetch(:input_options, {}))
 
     @template.label(@object_name, method, label_text, label_options) +
@@ -79,7 +79,7 @@ class CoachNotebookFormBuilder < ActionView::Helpers::FormBuilder
 
   def text_area(method, options = {})
     label_text = options.fetch(:label, method.to_s.humanize)
-    label_options = options.fetch(:label_options, {class: "form-label"})
+    label_options = options.fetch(:label_options, { class: "form-label" })
 
     options[:class] = "form-input"
 

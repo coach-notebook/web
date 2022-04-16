@@ -9,6 +9,15 @@ class ApplicationController < ActionController::Base
     false
   end
 
+  def param_array(params, key)
+    param = params.fetch(key, "[]")
+    return [] if param == ""
+    JSON.parse(param)
+  rescue => error
+    Rails.logger.error error.inspect
+    []
+  end
+
   private
 
   def set_practices

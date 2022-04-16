@@ -11,10 +11,6 @@ export const TagField = ({
   const inputRef = useRef<HTMLInputElement>(null);
   const hiddenInputRef = useRef<HTMLInputElement>(null);
 
-  if (!name) {
-    return null;
-  }
-
   useEffect(() => {
     setTags(values);
   }, [hiddenInputRef]);
@@ -44,7 +40,7 @@ export const TagField = ({
       <input
         type="hidden"
         ref={hiddenInputRef}
-        name={name}
+        name={name!}
         value={JSON.stringify(tags)}
       />
       <input

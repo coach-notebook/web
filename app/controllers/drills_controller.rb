@@ -4,7 +4,7 @@ class DrillsController < ApplicationController
   before_action :set_libraries, only: [:edit, :new, :create, :update]
 
   def safe_params
-    params.require(:drill).permit(:name, :body, :duration_minutes, :library_id, :tags, :keys, :goals, :variations, :number_of_players)
+    params.require(:drill).permit(:name, :body, :library_id, :duration_minutes, :number_of_players, :variations, :keys, :goals, :tag_list)
   end
 
   def index
@@ -28,10 +28,10 @@ class DrillsController < ApplicationController
   def create
     @drill = Drill.create safe_params.merge({
       user: current_user,
-      variations: JSON.parse(safe_params.fetch(:variations, "[]")),
-      tags: JSON.parse(safe_params.fetch(:tags, "[]")),
-      keys: JSON.parse(safe_params.fetch(:keys, "[]")),
-      goals: JSON.parse(safe_params.fetch(:goals, "[]")),
+      variations: param_array(safe_params, :variations),
+      tag_list: param_array(safe_params, :tag_list),
+      keys: param_array(safe_params, :keys),
+      goals: param_array(safe_params, :goals),
     })
     if @drill.valid?
       current_user.access_controls.create(access_controlled: @drill)
@@ -45,10 +45,10 @@ class DrillsController < ApplicationController
 
   def update
     @drill.update(safe_params.merge({
-      variations: JSON.parse(safe_params.fetch(:variations, "[]")),
-      tags: JSON.parse(safe_params.fetch(:tags, "[]")),
-      keys: JSON.parse(safe_params.fetch(:keys, "[]")),
-      goals: JSON.parse(safe_params.fetch(:goals, "[]")),
+      variations: param_array(safe_params, :variations),
+      tag_list: param_array(safe_params, :tag_list),
+      keys: param_array(safe_params, :keys),
+      goals: param_array(safe_params, :goals),
     }))
     if @drill.valid?
       redirect_to @drill

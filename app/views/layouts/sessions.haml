@@ -19,7 +19,8 @@
               - flash.each do |type, message| 
                 %div{ class: "flash-#{type}"}= message
           = yield
-
-          .flash-notice
-          .flash-warning
-          .flash-success
+          .hidden
+            .flashes
+              .flash-notice
+              .flash-warning
+              .flash-success

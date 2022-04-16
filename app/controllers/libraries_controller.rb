@@ -37,7 +37,7 @@ class LibrariesController < ApplicationController
   end
 
   def set_library
-    @libraries = @current_user.libraries
-    @library = @current_user.libraries.find_by(id: params[:id])
+    @libraries = current_user.libraries
+    @library = current_user.libraries.find_by(id: params[:id])
   end
 end

@@ -3,7 +3,12 @@
 .page-list
     .page-item
         .page-title= Player.model_name.human.pluralize
-        .gridx4= render @team.players
+        .gridx4
+            = render(@team.players) || render(partial: 'application/empty')
+            = link_to new_player_path(team_id: @team), class: [:cell, :new] do 
+                .cell-body= t("player.new")
+
     .page-item 
         .page-title= Match.model_name.human.pluralize
-        .gridx4= render @team.matches
+        .gridx4
+            = render @team.matches

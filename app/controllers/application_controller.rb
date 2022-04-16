@@ -39,4 +39,8 @@ class ApplicationController < ActionController::Base
   def set_drills
     @drills = Drill.accessible_to(current_user)
   end
+
+  def set_matches
+    @matches = Match.accessible_to(current_user)
+  end
 end

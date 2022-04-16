@@ -1,13 +1,14 @@
 class PlayersController < ApplicationController
   before_action :ensure_enabled
-  before_action :set_player
+  before_action :set_player, only: [:show, :edit, :update]
+  before_action :set_teams, only: [:edit, :new, :create, :update]
 
   def safe_params
-    params.require(:player).permit(:name, :team_id)
+    params.require(:player).permit(:name, :team_id, :squad_id)
   end
 
   def index
-    @pagy, @players = pagy Player.all
+    @pagy, @players = pagy Player.accessible_to(current_user)
   end
 
   def new
@@ -18,6 +19,8 @@ class PlayersController < ApplicationController
   def create
     @player = Player.create safe_params
     if @player.valid?
+      @player.update(squad: @player.team.squad)
+      current_user.access_controls.create(access_controlled: @player)
       flash[:success] = t("player.created")
       redirect_to @player
     else
@@ -48,7 +51,11 @@ class PlayersController < ApplicationController
     fail ActiveRecord::RecordNotFound unless @player
   end
 
+  def set_squads
+    @teams = Team.accessible_to(current_user)
+  end
+
   def ensure_enabled
-    render :not_found unless Flipper.enabled?(:matches, current_user)
+    head :unauthorized unless Flipper.enabled?(:matches, current_user)
   end
 end

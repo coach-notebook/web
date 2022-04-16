@@ -2,6 +2,13 @@ en:
   app:
     name: Notebook
     title: Notebook
+  position:
+    pg: Point Guard
+    sg: Shooting Guard
+    sf: Small Forward
+    pf: Power Forward
+    c: Centre
+    bench: Bench
   minute: minute
   dashboard: Dashboard
   flash:

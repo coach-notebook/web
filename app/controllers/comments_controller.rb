@@ -19,6 +19,6 @@ class CommentsController < ApplicationController
   protected
 
   def ensure_enabled
-    render :not_found unless Flipper.enabled?(:comments, current_user)
+    head :unauthorized unless Flipper.enabled?(:comments, current_user)
   end
 end

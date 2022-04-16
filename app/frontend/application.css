@@ -75,8 +75,14 @@
   .page-heading {
     @apply text-xl;
   }
+  .gridx3 {
+    @apply grid grid-cols-3;
+  }
   .gridx4 {
     @apply grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4;
+  }
+  .gridx5 {
+    @apply grid grid-cols-5 gap-4;
   }
   .calendar {
     @apply grid grid-cols-7 gap-4;
@@ -120,6 +126,9 @@
   }
   .cell-byline {
     @apply text-sm text-neutral-100 opacity-50;
+  }
+  .cell-subheader {
+    @apply text-sm opacity-70;
   }
   .page-list {
     @apply grid grid-cols-1 space-y-4 divide-y dark:divide-neutral-800;

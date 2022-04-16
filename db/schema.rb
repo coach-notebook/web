@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_20_125525) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_30_125703) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -31,6 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_20_125525) do
     t.uuid "player_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "starting_position"
     t.index ["match_id"], name: "index_appearances_on_match_id"
     t.index ["player_id"], name: "index_appearances_on_player_id"
   end
@@ -91,11 +92,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_20_125525) do
   create_table "matches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "played_at"
     t.string "opposition"
-    t.string "result"
     t.boolean "home_team"
     t.uuid "team_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "home_score", default: 0
+    t.integer "away_score", default: 0
+    t.boolean "score_final", default: false
+    t.boolean "forfeit", default: false
     t.index ["team_id"], name: "index_matches_on_team_id"
   end
 
@@ -104,6 +108,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_20_125525) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "team_id"
+    t.uuid "squad_id"
+    t.string "number"
   end
 
   create_table "plays", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

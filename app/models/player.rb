@@ -11,9 +11,12 @@
 class Player < ApplicationRecord
   include AccessControlled
 
-  belongs_to :team
+  belongs_to :team, optional: true
+  belongs_to :squad, optional: true
+
   has_many :appearances
   has_many :matches, through: :appearances
+  has_many :comments, as: :commentable
 
   validates :name, presence: true
 end

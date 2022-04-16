@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get "/signup", to: "users#new", as: :signup
 
   resources :comments, only: [:create, :destroy]
+  resources :appearances
   resources :drills
   resources :matches
   resources :players

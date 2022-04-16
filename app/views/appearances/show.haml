@@ -1,0 +1,5 @@
+= render PageHeader.new(title: @appearance.player.to_s, subtitle: [@appearance.match.to_s, t("position.#{@appearance.starting_position}")]) do 
+    = link_to(t("appearance.edit"), edit_appearance_path(@appearance), class: "btn-primary")
+.page-list    
+    = render "tags", taggable: @appearance
+    = render "comments", commentable: @appearance

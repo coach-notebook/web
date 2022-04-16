@@ -4,7 +4,7 @@
     <div class="width flex">
         <div class="flex-1">
             <h2 class="subtitle"><%= @subtitle.is_a?(Array) ? @subtitle.join(" ") : @subtitle %></h2>
-            <h1 class="title"><%= @title %></h1>
+            <h1 class="title"><%= @title.is_a?(Array) ? @title.join(" ") : @title %></h1>
         </div>
         <% if content %>
             <div class="justify-self-end">

@@ -1,0 +1,11 @@
+= link_to appearance, class: [:cell, :match ] do 
+    .cell-body
+        .cell-byline
+            = appearance.match
+        .cell-header
+            = "##{appearance.player.number}"
+            = appearance.player
+        - if appearance.starting_position
+            .cell-subheader
+                = t("position.#{appearance.starting_position}")
+            

@@ -1,9 +1,9 @@
-= render PageHeader.new(title: @player, subtitle: [ @player.team, @player.team.squad]) do
+= render PageHeader.new(title: @player, subtitle: [ @player.team, @player.squad]) do
     = link_to(t("player.edit"), edit_player_path(@player), class: "btn-primary")
 .page-list
     .page
         .sidebar 
-            = @player.inspect
+            = render "comments", commentable: @player
         .body
-            .page-title= Match.model_name.human.pluralize
-            .gridx4= render @player.matches
+            .page-title= Appearance.model_name.human.pluralize
+            .grid= render @player.appearances

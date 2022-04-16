@@ -1,5 +1,6 @@
-= link_to player, class: "cell" do 
-    .cell-image
-    .cell-header= player.name
-    .cell-byline= player.team.name
-    
+= link_to player, class: [:cell, :player] do 
+    .cell-body
+        .cell-header
+            = player.number
+            = player
+        .cell-byline= player.team

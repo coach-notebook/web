@@ -1,0 +1,6 @@
+= render PageHeader.new(title: Match.model_name.human) 
+= form_with model: @appearance, builder: CoachNotebookFormBuilder do |form|
+    = form.hidden_field :match_id
+    = form.select :player_id, @match.team.players.map{|player| [player.name, player.id]}
+    = form.select :starting_position, Appearance.positions.each_with_index.map{|p, i| [t("position.#{p}"), i+1]}
+    = form.submit

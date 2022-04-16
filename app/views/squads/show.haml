@@ -13,5 +13,11 @@
             .page-title= Team.model_name.human.pluralize
             .gridx4
                 = render @squad.teams.accessible_to(current_user)
-                = link_to new_team_path(squad_squad_id: @squad), class: [:cell, :new] do 
+                = link_to new_team_path(squad_id: @squad), class: [:cell, :new] do 
                     .cell-body= t("team.new")
+        .page-item 
+            .page-title= Player.model_name.human.pluralize
+            .gridx4
+                = render @squad.players.accessible_to(current_user)
+                = link_to new_player_path(squad_id: @squad), class: [:cell, :new] do 
+                    .cell-body= t("player.new")

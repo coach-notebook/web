@@ -85,6 +85,6 @@ class PracticesController < ApplicationController
   end
 
   def ensure_enabled
-    render :not_found unless Flipper.enabled?(:drills, current_user)
+    head :unauthorized unless Flipper.enabled?(:drills, current_user)
   end
 end

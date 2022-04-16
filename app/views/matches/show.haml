@@ -1,7 +1,28 @@
-= render PageHeader.new( title: [@match.home_team ? "vs" : "at", @match.opposition].join(" "), subtitle: l(@match.played_at, format: :day_date) )
+= render PageHeader.new( title: @match, subtitle: l(@match.played_at, format: :day_date) ) do
+    = link_to t("match.edit"), edit_match_path(@match), class: 'btn-secondary'
 .page-list
     = render "tags", taggable: @match
-    - unless @match.appearances.empty?
+    - if @match.score_final
         .page-item
-            .grid= render @match.appearances
-    = render "comments", commentable: @match
+            - if !@match.forfeit 
+                .gridx3.border.p-8.rounded.border-neutral-700
+                    .text-center
+                        %h3.text-2xl= @match.home_score
+                        %h4.text-sm= @match.home_team ? @match.team : @match.opposition
+                    .text-2xl.text-center
+                        = @match.home_score > @match.away_score ? t("defeated") : t("lost_to")
+                    .text-center
+                        %h3.text-2xl= @match.away_score
+                        %h4.text-sm= @match.home_team ? @match.opposition : @match.team
+            - else 
+                .text-2xl.text-center= t("match.forfeit_result")
+    .page-item
+        .page-title= Match.human_attribute_name(:lineup) 
+        .gridx5
+            = render @match.appearances.order(:starting_position)
+            = link_to new_appearance_path(match_id: @match.id), class: [:cell, :new] do 
+                .cell-body= t("appearance.new")
+    .page-item 
+        .page-title= Match.human_attribute_name(:gameplan) 
+    .page-item 
+        .page-title= Match.human_attribute_name(:review) 

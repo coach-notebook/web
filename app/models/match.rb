@@ -21,4 +21,8 @@ class Match < ApplicationRecord
 
   has_many :appearances
   has_many :players, through: :appearances
+
+  def to_s
+    [home_team ? "vs" : "at", opposition].join(" ")
+  end
 end

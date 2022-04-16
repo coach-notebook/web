@@ -1,13 +1,10 @@
 = render PageHeader.new(title: @library.name) do
     = link_to t("library.edit"), edit_library_path(@library), class: 'btn-secondary'
-.page
-    .body
-        .page-item
-            .gridx4
-                = render @library.drills.accessible_to(current_user)
-                = link_to new_library_drills_path(@library), class: [:cell, :new] do 
-                    .cell-body= t("drill.new")
-        .page-item
-            = render "comments", commentable: @library
-    .sidebar
-        .page-item= render @library.tags
+.page-list
+    = render "tags", taggable: @library
+    .page-item
+        .gridx4
+            = render @library.drills.accessible_to(current_user)
+            = link_to new_library_drills_path(@library), class: [:cell, :new] do 
+                .cell-body= t("drill.new")
+    = render "comments", commentable: @library

@@ -3,20 +3,23 @@
 @tailwind utilities;
 
 @layer components {
+  /* * {
+    outline: 1px dotted dodgerblue;
+  } */
   html {
     @apply h-full bg-white text-neutral-800 dark:bg-neutral-900 dark:text-neutral-100;
   }
   body {
-    @apply flex h-screen flex-col justify-between;
+    @apply flex h-screen flex-col justify-between pt-16;
   }
   nav {
-    @apply bg-neutral-100 dark:bg-neutral-800;
+    @apply fixed top-0 hidden w-screen border-b-2 border-neutral-800  backdrop-blur-lg dark:bg-neutral-900/90 dark:text-neutral-100 md:block;
   }
   nav > div {
     @apply width;
   }
   header {
-    @apply py-6;
+    @apply sm:pb-4 sm:pt-6;
   }
   main {
     @apply width  flex-1 pb-32;
@@ -25,7 +28,7 @@
     @apply bottom-0 w-full bg-neutral-100 p-16 text-neutral-400 dark:bg-neutral-800;
   }
   .nav-button {
-    @apply rounded-md py-2 px-3 text-sm font-medium text-neutral-800 hover:bg-neutral-500 hover:bg-opacity-75 dark:text-neutral-300;
+    @apply rounded-md py-2 px-3 text-sm font-medium text-neutral-800 hover:bg-neutral-700 hover:bg-opacity-75 dark:text-neutral-300;
   }
   .width {
     @apply mx-auto w-full p-4 md:max-w-6xl 2xl:p-0;
@@ -42,15 +45,14 @@
   .page-title {
     @apply mb-2 text-xl text-neutral-700 dark:text-neutral-300;
   }
-
   .subtitle {
     @apply text-2xl font-thin text-neutral-800 dark:text-neutral-400;
   }
   .btn-primary {
-    @apply inline-flex justify-center rounded-md border border-transparent bg-neutral-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2;
+    @apply rounded-md border border-transparent bg-neutral-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2;
   }
   .btn-secondary {
-    @apply inline-flex justify-center rounded-md border border-transparent bg-neutral-400 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2;
+    @apply rounded-md border border-transparent bg-neutral-400 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-sky-400 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2;
   }
   .rule {
     @apply my-4 border-t border-neutral-200 dark:border-neutral-800;
@@ -70,8 +72,11 @@
   .page-item:first-child {
     @apply pt-0;
   }
+  .page-heading {
+    @apply text-xl;
+  }
   .gridx4 {
-    @apply -mx-1 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4;
+    @apply grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4;
   }
   .calendar {
     @apply grid grid-cols-7 gap-4;
@@ -82,35 +87,40 @@
   a.cell {
     @apply hover:bg-neutral-50 dark:hover:bg-neutral-600;
   }
-  .cell.new {
-    @apply w-3/5;
-  }
+
   .cell.empty {
     @apply dark:bg-neutral-800;
   }
   /* https://hypercolor.dev */
-  /* .cell.team {
+  .cell.team {
     @apply bg-gradient-to-br from-pink-500 via-red-500 to-yellow-500;
   }
   .cell.drill {
-    @apply bg-gradient-to-r from-green-300 via-blue-500 to-purple-600;
+    @apply bg-gradient-to-br from-green-500 to-green-700;
   }
   .cell.practice {
-    @apply bg-gradient-to-r from-purple-400 to-yellow-400;
-  } */
+    @apply bg-gradient-to-br from-purple-800 to-purple-400;
+  }
+  .cell.library {
+    @apply bg-gradient-to-br from-yellow-600 to-red-600;
+  }
+  .cell.squad {
+    @apply bg-gradient-to-br from-sky-900 to-sky-600;
+  }
+  .cell.match {
+    @apply bg-gradient-to-br from-lime-900 via-lime-700 to-lime-400;
+  }
   .cell.new {
-    @apply bg-sky-700 text-sky-100 hover:bg-sky-600 hover:text-sky-200;
+    @apply btn-primary w-3/5;
   }
   .cell-image {
     @apply w-full;
   }
   .cell-body {
-    @apply absolute left-0 bottom-0 p-4;
-  }
-  .cell-header {
+    @apply absolute left-0 bottom-0 w-full p-4;
   }
   .cell-byline {
-    @apply text-sm text-neutral-300 dark:text-neutral-500;
+    @apply text-sm text-neutral-100 opacity-50;
   }
   .page-list {
     @apply grid grid-cols-1 space-y-4 divide-y dark:divide-neutral-800;
@@ -128,16 +138,19 @@
     @apply absolute right-0 top-8 mt-2 hidden w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none  dark:bg-neutral-600;
   }
   .menu > ul > li a {
-    @apply block py-2 px-4 text-sm text-neutral-700 hover:bg-sky-100 hover:bg-sky-900 dark:text-neutral-200 dark:text-neutral-200;
+    @apply block py-2 px-4 text-sm text-neutral-700 hover:bg-sky-900 dark:text-neutral-200 dark:hover:bg-sky-100;
   }
   .menu:hover > ul {
     @apply block;
   }
   .flashes {
-    @apply width;
+    @apply width absolute bottom-4 left-4 w-1/6 opacity-70;
   }
   .flashes div {
-    @apply my-4 rounded-lg  p-8 py-6 text-lg;
+    @apply rounded-lg p-8 py-6 shadow-lg;
+  }
+  .flashes div h2 {
+    @apply font-semibold;
   }
   .flash-warning {
     @apply bg-red-100 text-red-900;
@@ -185,10 +198,10 @@
     @apply bg-red-50 text-red-900 ring-2 ring-red-700;
   }
   textarea.form-input {
-    @apply h-80;
+    @apply h-60 sm:h-60;
   }
   .form-submit {
-    @apply w-full place-content-end rounded-2xl bg-sky-400 p-4 text-xl text-neutral-100 md:col-start-2;
+    @apply btn-primary w-full rounded;
   }
   .form-input-tag {
     @apply mb-2;

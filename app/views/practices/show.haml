@@ -1,26 +1,25 @@
 = render PageHeader.new(title: l(@practice.practice_at, format: :day_date), subtitle: [@practice.squad.competition, @practice.squad.season, @practice.squad.name])
 .page-list
-    - unless @practice.past?
-        .page-item 
-            = form_tag "/practices/#{@practice.id}/drills", builder: CoachNotebookFormBuilder do
-                = select_tag :drill_id, options_from_collection_for_select(@drills, :id, :name), class: "form-input"
-                = submit_tag t("drill.new"), class: "btn-primary"
+    = render "tags", taggable: @practice
     - @practice.practice_drills.order(:position).each do |practice_drill| 
         .page-item
-            .page
-                .sidebar
-                    .heading-1= link_to practice_drill.drill.name, drill_path(practice_drill.drill)
-                    .byline= pluralize practice_drill.drill.duration_minutes, Drill.human_attribute_name(:minute) 
-                    - practice_drill.drill.tags.each do |tag|
-                        .tag= t("tags.#{tag}")
-                    - unless @practice.past?
-                        = button_to "remove", "/practices/#{@practice.id}/drills/#{practice_drill.drill.id}", class: "btn-secondary", method: :delete
-                .body
-                    = markdown practice_drill.drill.body
-                    = render Rating.new(rating: @practice.rating, url: "#") if @practice.past?
-                    - if practice_drill.variation?
-                        .text-sm= practice_drill.variation 
-                    - if practice_drill.drill.keys?
-                        .text-xs.text-slate-500= Drill.human_attribute_name(:keys) 
-                        .text-sm= practice_drill.drill.keys.to_sentence
+            %h3.page-heading= link_to practice_drill.drill.name, drill_path(practice_drill.drill)
+            .byline= pluralize practice_drill.drill.duration_minutes, Drill.human_attribute_name(:minute) 
+            = render "tags", taggable: practice_drill.drill
+            = markdown practice_drill.drill.body
+            = render Rating.new(rating: @practice.rating, url: "#") if @practice.past?
+            - if practice_drill.variation
+                %h4.page-heading.text-slate-500= Drill.human_attribute_name(:variation) 
+                = practice_drill.variation
+            %h4.text-neutral-500= Drill.human_attribute_name(:keys) 
+            = practice_drill.drill.keys.to_sentence
+            %h4.text-neutral-500= Drill.human_attribute_name(:goals) 
+            = practice_drill.drill.goals.to_sentence
+    - unless @practice.past?
+        .page-item 
+            = form_for "/practices/#{@practice.id}/drills", builder: CoachNotebookFormBuilder, html: { class: "items-center gap-2"}  do
+                .col-span-2
+                    = select_tag :drill_id, options_from_collection_for_select(@drills, :id, :name), class: "form-input"
+                .col-span-1
+                    = submit_tag t("drill.new.add_to_practice"), class: "btn-primary"
     = render "comments", commentable: @practice

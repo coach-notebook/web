@@ -1,26 +1,21 @@
 = render PageHeader.new(title: @drill.name, subtitle: pluralize(@drill.duration_minutes, t(:minute))) do 
     = link_to t("drill.edit"), edit_drill_path(@drill), class: "btn-primary"
-.page-list
-    .page
-        .body
-            = render "tags", taggable: @drill
-            .page-item
-                = markdown @drill.body
-            - if @drill.keys?
-                .page-item
-                    .page-heading= Drill.human_attribute_name(:keys) 
-                    - @drill.keys.each do |key|
-                        = key 
-            - if @drill.variations?
-                .page-item
-                    .page-heading= Drill.human_attribute_name(:variations) 
-                    - @drill.variations.each do |variation|
-                        = variation 
-            - if @drill.goals?
-                .page-item
-                    .page-heading= Drill.human_attribute_name(:goals) 
-                    - @drill.goals.each do |goal|
-                        = goal 
-            = render "comments", commentable: @drill
-        .sidebar
-            .page-item= render @drill.tags
+= render "tags", taggable: @drill
+.page-item
+    = markdown @drill.body
+- if @drill.keys?
+    .page-item
+        .page-heading= Drill.human_attribute_name(:keys) 
+        - @drill.keys.each do |key|
+            = key 
+- if @drill.variations?
+    .page-item
+        .page-heading= Drill.human_attribute_name(:variations) 
+        - @drill.variations.each do |variation|
+            = variation 
+- if @drill.goals?
+    .page-item
+        .page-heading= Drill.human_attribute_name(:goals) 
+        - @drill.goals.each do |goal|
+            = goal 
+= render "comments", commentable: @drill

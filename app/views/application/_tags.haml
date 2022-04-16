@@ -1,2 +1,3 @@
-.page-item.tags
-    = render taggable.tags
+- if Flipper.enabled?(:tags, current_user)
+    .page-item.tags
+        = render taggable.tags

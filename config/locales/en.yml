@@ -1,8 +1,7 @@
 en:
   app:
-    name: Coach Notebook
-  hello: "Hello world"
-  title: coach_notebook
+    name: Notebook
+    title: Notebook
   minute: minute
   dashboard: Dashboard
   flash:
@@ -18,6 +17,8 @@ en:
     create:
       success: Created Library
   drill:
+    new:
+      add_to_practice: Add Drill
     create:
       success: Created Drill
   match:

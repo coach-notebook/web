@@ -52,4 +52,4 @@ jobs:
       - name: Security audit application code
         run: bundle exec brakeman --no-progress --quiet --rails7
       - name: Lint Ruby files
-        run: bundle exec standardrb (app|db)/**/*.rb  --fix
+        run: bundle exec standardrb **/*.rb  --fix

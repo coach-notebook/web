@@ -1,4 +1,6 @@
 en:
+  app:
+    name: Coach Notebook
   hello: "Hello world"
   title: coach_notebook
   minute: minute

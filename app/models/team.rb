@@ -10,4 +10,6 @@
 #
 class Team < ApplicationRecord
   belongs_to :squad
+  has_many :players
+  has_many :matches
 end

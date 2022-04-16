@@ -1,0 +1,27 @@
+%nav 
+    .width
+        .flex.items-center.justify-between.relative.h-16
+            .hidden.lg:block.justify-start.-ml-4
+                .flex.space-x-4
+                    = link_to t("dashboard"), root_path, class: "nav-button"
+                    = link_to Library.model_name.human.pluralize, libraries_path, class: "nav-button"
+                    = link_to Practice.model_name.human.pluralize, practices_path, class: "nav-button"
+                    = link_to Drill.model_name.human.pluralize, drills_path, class: "nav-button"
+                    = link_to Squad.model_name.human.pluralize, squads_path, class: "nav-button"
+                    = link_to Team.model_name.human.pluralize, teams_path, class: "nav-button"
+                    = link_to Match.model_name.human.pluralize, matches_path, class: "nav-button"
+            .hidden.lg:block.justify-end
+                .flex.items-center 
+                    %button{type:"button", class:"bg-neutral-600 flex-shrink-0 rounded-full p-1 text-neutral-200 hover:text-neutral-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-600 focus:ring-white"}
+                        .sr-only View notifications 
+                        .w-6.h6
+                            = heroicon :bell
+                    .ml-3.relative.flex-shrink-0 
+                        %div
+                            %button{type:"button", class:"bg-neutral-600 rounded-full flex text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-600 focus:ring-white"}
+                                .sr-only Open user menu
+                                %img.rounded-full.h-8.w-8{src: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" }
+                    %div.hidden.origin-top-right.absolute.right-0.mt-2.w-48.rounded-md.shadow-lg.py-1.bg-white.ring-1.ring-black.ring-opacity-5.focus:outline-none{ role: "menu", "aria-orientation": "vertical", "aria-labelledby": "user-menu-button", tabindex: "-1" }
+                        = link_to(t("app.profile"), "#", { class: "block py-2 px-4 text-sm text-neutral-700", tabindex: "-1", id:"user-menu-item-1" })
+                        = link_to(t("app.settings"), "#", { class: "block py-2 px-4 text-sm text-neutral-700", tabindex: "-1", id:"user-menu-item-2" })
+                        = link_to(t("app.signout"), "#", { class: "block py-2 px-4 text-sm text-neutral-700", tabindex: "-1", id:"user-menu-item-3" })

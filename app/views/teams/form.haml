@@ -1,0 +1,5 @@
+= render PageHeader.new(title: Team.model_name.human) 
+= form_with model: @team, builder: CoachNotebookFormBuilder do |form|
+    = form.select :squad_id, Squad.all.map{|s| [s.name, s.id]}
+    = form.text_field :name
+    = form.submit

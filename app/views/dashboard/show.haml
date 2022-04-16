@@ -1,0 +1,6 @@
+= render PageHeader.new(title: t("app.dashboard"))
+.page-list
+    .page-item
+        .page-title= Match.model_name.human.pluralize
+    .page-item
+        .page-title= Practice.model_name.human.pluralize

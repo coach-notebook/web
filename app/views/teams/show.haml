@@ -1,0 +1,9 @@
+= render PageHeader.new(title: @team, subtitle: @team.squad) do 
+    = link_to(t("team.edit"), edit_team_path(@team), class: "btn-primary")
+.page-list
+    .page-item
+        .page-title= Player.model_name.human.pluralize
+        .gridx4= render @team.players
+    .page-item 
+        .page-title= Match.model_name.human.pluralize
+        .gridx4= render @team.matches

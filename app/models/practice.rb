@@ -28,7 +28,7 @@ class Practice < ApplicationRecord
   def copy_drills_from(other_practice_id)
     if @original_practice = Practice.find_by(id: other_practice_id)
       @original_practice.drills.each do |drill|
-        self.practice_drills.create(drill: drill)
+        practice_drills.create(drill: drill)
       end
     end
   end

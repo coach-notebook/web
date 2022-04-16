@@ -1,0 +1,7 @@
+= render PageHeader.new(title: Match.model_name.human.pluralize)  do 
+    = link_to t("match.new"), new_match_path, class: "btn-primary"
+.page-list
+    - Squad.all.each do |squad|
+        .page-item 
+            .page-title= squad.name
+            .gridx4= render squad.matches

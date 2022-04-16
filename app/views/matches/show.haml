@@ -1,0 +1,9 @@
+= render PageHeader.new( title: [@match.home_team ? "vs" : "at", @match.opposition].join(" "), subtitle: l(@match.played_at, format: :day_date) )
+.page-list
+    .page
+        .body
+            .page-title= Match.human_attribute_name(:comments) 
+            .page-title= Match.human_attribute_name(:tags) 
+        .sidebar
+            .sidebar-heading= Player.model_name.human.pluralize
+            .grid= render @match.players

@@ -1,0 +1,11 @@
+= render PageHeader.new(title: Team.model_name.human.pluralize) do 
+    = link_to t("team.new"), new_team_path, class: "btn-primary"
+.page-list
+    - Squad.all.each do |squad|
+        .page-item
+            .page-title
+                = link_to squad do 
+                    = squad.name 
+                    = squad.season
+                    = squad.competition
+            .gridx4= render squad.teams 

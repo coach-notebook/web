@@ -7,6 +7,12 @@
 #   Character.create(name: "Luke", movie: movies.first)
 user = FactoryBot.create(:user)
 FactoryBot.create_list(:library_with_plays_and_drills, 5, user: user)
-FactoryBot.create_list(:squad, 5, user: user).each do |squad|
+FactoryBot.create_list(:squad_with_teams, 3, user: user)
+Squad.all.each do |squad|
   FactoryBot.create_list(:practice, 5, squad: squad)
+  squad.teams.each do |team|
+    FactoryBot.create_list(:match, 5, team: team).each do |match|
+      match.players = team.players
+    end
+  end
 end

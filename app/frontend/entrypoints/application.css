@@ -1,88 +1,140 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@include "./cell.css";
 
 @layer components {
+  html {
+    @apply h-full bg-white text-neutral-800 dark:bg-neutral-900 dark:text-neutral-100;
+  }
+  nav {
+    @apply bg-neutral-100 dark:bg-neutral-800;
+  }
+  .nav-button {
+    @apply rounded-md py-2 px-3 text-sm font-medium text-neutral-800 hover:bg-neutral-500 hover:bg-opacity-75 dark:text-neutral-300;
+  }
   .width {
-    @apply max-w-7xl mx-auto lg:max-w-5xl p-2 lg:p-0
+    @apply mx-auto p-2 lg:max-w-7xl lg:p-0;
   }
-  .nav {
-    @apply bg-slate-300 dark:bg-slate-800;
-  }
-  .heading-1 {
-    @apply dark:text-slate-300 text-slate-700 text-lg font-medium
+  .sidebar-heading {
+    @apply text-lg font-medium text-neutral-700 dark:text-neutral-300;
   }
   .byline {
-    @apply text-slate-300 text-sm
+    @apply text-sm text-neutral-300;
   }
   .title {
-    @apply text-3xl font-bold text-slate-700 dark:text-slate-300
+    @apply text-4xl text-neutral-700 dark:text-neutral-300;
   }
   .page-title {
-    @apply text-xl font-bold mb-2 text-slate-700 dark:text-slate-300
+    @apply mb-2 text-xl text-neutral-700 dark:text-neutral-300;
   }
   .subtitle {
-    @apply text-2xl font-thin text-slate-800 dark:text-slate-400
+    @apply text-2xl font-thin text-neutral-800 dark:text-neutral-400;
   }
   .btn-primary {
-    @apply inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-slate-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500;
+    @apply inline-flex justify-center rounded-md border border-transparent bg-neutral-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2;
   }
   .btn-secondary {
-    @apply inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-slate-400 hover:bg-sky-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500;
-  } 
-  .rule {
-    @apply my-4 border-t border-slate-200 dark:border-slate-500
+    @apply inline-flex justify-center rounded-md border border-transparent bg-neutral-400 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2;
   }
-  .main {
-    @apply grid grid-cols-3 divide-x space-x-4 mb-1 -mx-4 dark:divide-slate-600
+  .rule {
+    @apply my-4 border-t border-neutral-200 dark:border-neutral-800;
+  }
+  .page {
+    @apply mb-1 grid grid-cols-1 space-x-4 divide-x dark:divide-neutral-800 md:-mx-4 md:grid-cols-3;
   }
   .body {
-    @apply col-span-2 p-4 mb-4
+    @apply col-span-2 md:mb-4 md:p-4;
   }
   .sidebar {
-    @apply col-span-1 p-4 mb-4
+    @apply col-span-1 md:mb-4 md:p-4;
   }
   .input-select {
-    @apply max-w-lg block focus:ring-sky-500 focus:border-sky-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md
+    @apply block w-full max-w-lg rounded-md border-neutral-300 shadow-sm focus:border-neutral-500 focus:ring-neutral-500 sm:max-w-xs sm:text-sm;
   }
   .input-group {
-    @apply border-red-900 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5 pb-2
+    @apply border-red-900 pb-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-neutral-200 sm:pt-5;
   }
   .input-label {
-    @apply block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2
+    @apply block text-sm font-medium text-neutral-700 sm:mt-px sm:pt-2;
   }
   .input-field {
-    @apply max-w-lg block w-full shadow-sm focus:ring-sky-500 focus:border-sky-500 sm:max-w-xs sm:text-sm border-gray-300 rounded
+    @apply block w-full max-w-lg rounded border-neutral-300 shadow-sm focus:border-neutral-500 focus:ring-neutral-500 sm:max-w-xs sm:text-sm;
   }
   .gridx4 {
-    @apply grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4
+    @apply -mx-1 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4;
   }
   .calendar {
-    @apply grid gap-4 grid-cols-7
+    @apply grid grid-cols-7 gap-4;
   }
   .cell {
-    @apply p-1 hover:bg-sky-50 rounded dark:hover:bg-sky-900
+    @apply rounded p-1 hover:bg-neutral-50 dark:bg-neutral-900  dark:hover:bg-neutral-800;
   }
   .cell-image {
-    @apply w-full h-40 p-4 mb-2 bg-slate-100 rounded border-slate-600  text-sky-900 dark:bg-slate-700
+    @apply mb-2 h-40 w-full rounded border-neutral-600 bg-neutral-100 p-4  text-neutral-900 dark:bg-neutral-700;
   }
   .cell-header {
-
   }
   .cell-byline {
-    @apply dark:text-slate-200 text-slate-300 text-sm
+    @apply text-sm text-neutral-300 dark:text-neutral-500;
   }
   .page-list {
-    @apply grid grid-cols-1 divide-y space-y-8 dark:divide-slate-600
+    @apply grid grid-cols-1 space-y-4 divide-y dark:divide-neutral-800;
+  }
+  .page-list > div:not(:first-child) {
+    @apply pt-4;
   }
   .tag {
-    @apply text-xs inline-block rounded px-2 mb-1 bg-slate-200 text-slate-800 hover:bg-sky-300 hover:text-sky-900
+    @apply mb-1 inline-block rounded bg-neutral-200 px-2 text-xs text-neutral-800 hover:bg-neutral-300 hover:text-neutral-900;
   }
   .flashes {
-    @apply mx-8 my-4
+    @apply mx-8 my-4;
   }
-  .flash-warning{
-    @apply p-4 py-2 rounded-lg text-sm bg-red-500 border border-red-900
+  .flash-warning {
+    @apply rounded-lg border border-red-900 bg-red-500 p-4 py-2 text-sm;
+  }
+  .comments {
+    @apply -mx-4 rounded-md bg-neutral-200 p-4 dark:bg-neutral-800;
+  }
+  .pagination {
+    @apply my-4 flex items-center justify-between border-t border-neutral-200 bg-transparent px-0 py-4 dark:border-neutral-800;
+  }
+  .pagination-items {
+    @apply text-neutral-500;
+  }
+  .pagination-item {
+    @apply inline-block px-3;
+  }
+  .pagination-button {
+    @apply text-neutral-500;
+  }
+  .pagination-active {
+    @apply rounded dark:bg-neutral-700 dark:text-neutral-300;
+  }
+  form {
+    @apply flex flex-col space-y-4;
+  }
+  .form-group {
+    @apply flex pb-2 text-neutral-700 dark:text-neutral-400 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-neutral-200 sm:pt-5  dark:sm:border-neutral-800;
+  }
+  .form-group:first-of-type {
+    @apply border-0;
+  }
+  .form-label {
+    @apply block font-medium sm:mt-px sm:pt-2;
+  }
+  .form-input {
+    @apply block w-full rounded-md border-neutral-300 p-4 shadow ring-1 focus:border-neutral-500 focus:ring-neutral-500 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200;
+  }
+  .form-input[name*="name"] {
+    @apply text-2xl;
+  }
+  textarea.form-input {
+    @apply h-80;
+  }
+  .form-submit {
+    @apply col-start-2 w-full place-content-end rounded-lg bg-neutral-200 p-4 text-neutral-700;
+  }
+  .form-input-wrapper {
+    @apply mt-1 sm:col-span-2 sm:mt-0;
   }
 }

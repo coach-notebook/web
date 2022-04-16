@@ -1,18 +1,8 @@
-= render PageHeader.new(title: l(@practice.practice_at, format: :day_date), subtitle: [@practice.squad.name, @practice.squad.season, @practice.squad.competition].compact.join(" | ")) do 
+= render PageHeader.new(title: l(@practice.practice_at, format: :day_date), subtitle: [@practice.squad.name, @practice.squad.season, @practice.squad.competition]) do 
     = render Rating.new(rating: @practice.rating) if @practice.past?
 .page-list
-    - if @practice.review?
-        .-mx-4.p-4.rounded-md.bg-slate-200
-            .text-sm.font-bold= Drill.human_attribute_name(:review) 
-            .text-sm= @practice.review
-    - else 
-        - if @practice.past?
-            = form_for @practice, builder: CoachNotebookFormBuilder do |form|
-                .mb-2
-                    = form.text_area :review
-                = form.submit "Save", class: "btn-primary"
     - @practice.practice_drills.order(:position).each do |practice_drill| 
-        .main
+        .page
             .sidebar
                 .heading-1= link_to practice_drill.drill.name, drill_path(practice_drill.drill)
                 .byline= pluralize practice_drill.drill.duration_minutes, Drill.human_attribute_name(:minute) 

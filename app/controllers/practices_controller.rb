@@ -2,7 +2,7 @@ class PracticesController < ApplicationController
   before_action :set_practice, only: [:edit, :update, :destroy, :show, :add_drill, :remote_drive]
 
   def safe_params
-    params.require(:practice).permit(:practice_at, :copy_practice_id, :squad_id, :review)
+    params.require(:practice).permit(:practice_at, :copy_practice_id, :squad_id)
   end
 
   def new

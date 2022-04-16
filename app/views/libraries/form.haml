@@ -1,5 +1,5 @@
 = render PageHeader.new(title: Library.model_name.human) 
-= form_with model: @library, class:"flex flex-col space-y-4", builder: CoachNotebookFormBuilder do |form|
-    = form.text_field :name, class: "input-field"
-    = form.text_area :notes, size: "60x20"
-    = form.submit "submit", class: "btn-primary"
+= form_with model: @library, builder: CoachNotebookFormBuilder do |form|
+    = form.text_field :name 
+    = form.text_area :notes
+    = form.submit

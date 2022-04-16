@@ -5,6 +5,10 @@ class LibrariesController < ApplicationController
     params.require(:library).permit(:name, :notes)
   end
 
+  def index
+    @pagy, @libraries = pagy @libraries
+  end
+
   def new
     @library = @libraries.build
     render template: "libraries/form"

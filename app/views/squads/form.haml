@@ -1,7 +1,6 @@
 = render PageHeader.new(title: Squad.model_name.human) 
-= form_with model: @squad, class:"flex flex-col space-y-4", builder: CoachNotebookFormBuilder do |form|    
+= form_with model: @squad, builder: CoachNotebookFormBuilder do |form|
     = form.text_field :name
     = form.text_field :competition
     = form.text_field :season
-    
-    = form.submit "submit", class: "btn-primary"
+    = form.submit

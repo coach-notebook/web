@@ -112,6 +112,8 @@ GEM
     haml (5.2.2)
       temple (>= 0.8.0)
       tilt
+    heroicon (0.4.0)
+      rails (>= 5.2)
     hotwire-rails (0.1.3)
       rails (>= 6.0.0)
       stimulus-rails
@@ -313,6 +315,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   haml
+  heroicon
   hotwire-rails
   jbuilder
   jsbundling-rails

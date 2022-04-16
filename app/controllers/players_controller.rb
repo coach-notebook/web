@@ -5,6 +5,10 @@ class PlayersController < ApplicationController
     params.require(:player).permit(:name, :team_id)
   end
 
+  def index
+    @pagy, @players = pagy Player.all
+  end
+
   def new
     @player = Player.new
     render template: "players/form"
@@ -37,8 +41,6 @@ class PlayersController < ApplicationController
   end
 
   def set_player
-    @squads = @current_user.squads
-    @players = Player.where(squad: @squads)
-    @player = @players.find_by(id: params[:id])
+    @player = Player.find_by(id: params[:id])
   end
 end

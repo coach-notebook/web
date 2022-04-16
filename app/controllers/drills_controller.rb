@@ -1,8 +1,12 @@
 class DrillsController < ApplicationController
-  before_action :set_drill
+  before_action :set_drill, only: [:show, :edit, :destroy]
 
   def safe_params
     params.require(:drill).permit(:name, :body, :duration_minutes, :library_id, :tags)
+  end
+
+  def index
+    @pagy, @drills = pagy Drill.all
   end
 
   def new

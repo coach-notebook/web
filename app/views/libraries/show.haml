@@ -1,7 +1,7 @@
 = render PageHeader.new(title: @library.name) do
     = link_to t("library.edit"), edit_library_path(@library), class: 'btn-secondary'
     = link_to t("drill.new"), new_library_drills_path(@library), class: 'btn-primary'
-.main
+.page
     .sidebar
         = markdown @library.notes
         .byline

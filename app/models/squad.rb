@@ -16,6 +16,8 @@ class Squad < ApplicationRecord
   has_many :players
   has_many :practices
   has_many :teams
+  has_many :matches, through: :teams
+
   belongs_to :user
 
   validates :name, presence: true

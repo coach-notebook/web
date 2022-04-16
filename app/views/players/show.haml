@@ -1,2 +1,9 @@
-<h1>Players#show</h1>
-<p>Find me in app/views/players/show.html.erb</p>
+= render PageHeader.new(title: @player, subtitle: [ @player.team, @player.team.squad]) do
+    = link_to(t("player.edit"), edit_player_path(@player), class: "btn-primary")
+.page-list
+    .page
+        .sidebar 
+            = @player.inspect
+        .body
+            .page-title= Match.model_name.human.pluralize
+            .gridx4= render @player.matches

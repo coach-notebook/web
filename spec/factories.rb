@@ -1,4 +1,26 @@
 FactoryBot.define do
+  factory :appearance do
+    player { nil }
+    match { nil }
+  end
+
+  factory :team do
+    name { Faker::Team.name.titlecase }
+    squad
+    factory :team_with_players do
+      after(:create) do |team, e|
+        create_list(:player, 7, team: team)
+      end
+    end
+  end
+
+  factory :match do
+    played_at { rand(12).weeks.ago }
+    opposition { Faker::Team.name.titlecase }
+    home_team { [true, false].sample }
+    team
+  end
+
   factory :session do
   end
 
@@ -39,7 +61,7 @@ FactoryBot.define do
   end
 
   factory :drill do
-    name { Faker::Team.name }
+    name { [Faker::Team.state, rand(99)].join(" ") }
     body { Faker::Lorem.paragraph }
     duration_minutes { [5, 10, 20, 30, 45, 60, 90].sample }
     number_of_players { rand(5) }
@@ -50,7 +72,7 @@ FactoryBot.define do
   end
 
   factory :play do
-    name { Faker::Team.name }
+    name { [Faker::Science.element, rand(99)].join(" ") }
     notes { Faker::Lorem.paragraph }
     court { ["full", "half"].sample }
     library
@@ -58,12 +80,11 @@ FactoryBot.define do
 
   factory :player do
     name { Faker::Name.name }
-    squad
+    team
   end
 
   factory :practice do
     practice_at { rand(7).weeks.from_now }
-    review { Faker::Lorem.paragraph }
     squad
     trait :past do
       practice_at { rand(7).weeks.ago }
@@ -87,11 +108,19 @@ FactoryBot.define do
   end
 
   factory :squad do
-    name { %w( u8 u10 u12 u14 u16 u18 u23 ).sample }
+    name { %w( u8 u10 u12 u14 u16 u18 u23 ).sample.upcase }
     active { [true, false].sample }
-    competition { Faker::Lorem.word }
-    season { [%w( summer autumn winter spring ).sample, (-3 + rand(6)).years.from_now.strftime("%Y")].join(" ") }
+    competition { Faker::Lorem.word.titlecase }
+    season { [%w( summer autumn winter spring ).sample.titlecase, (-3 + rand(6)).years.from_now.strftime("%Y")].join(" ") }
     user
+    factory :squad_with_teams do
+      transient do
+        teams_count { 5 }
+      end
+      after(:create) do |squad, e|
+        create_list(:team_with_players, 5, squad: squad)
+      end
+    end
     factory :squad_with_libraries do
       transient do
         libraries_count { 5 }
@@ -100,10 +129,5 @@ FactoryBot.define do
         create_list(:library, e.libraries_count, squad: squad)
       end
     end
-  end
-
-  factory :team do
-    name { Faker::Team.name }
-    squad
   end
 end

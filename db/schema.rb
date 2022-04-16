@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_15_090839) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_17_102947) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "appearances", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "match_id", null: false
+    t.uuid "player_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["match_id"], name: "index_appearances_on_match_id"
+    t.index ["player_id"], name: "index_appearances_on_player_id"
+  end
 
   create_table "drills", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "library_id", null: false
@@ -39,12 +48,22 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_15_090839) do
     t.index ["user_id"], name: "index_libraries_on_user_id"
   end
 
+  create_table "matches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "played_at"
+    t.string "opposition"
+    t.string "result"
+    t.boolean "home_team"
+    t.uuid "team_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_matches_on_team_id"
+  end
+
   create_table "players", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "squad_id", null: false
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["squad_id"], name: "index_players_on_squad_id"
+    t.uuid "team_id"
   end
 
   create_table "plays", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -74,7 +93,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_15_090839) do
     t.uuid "squad_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "review"
     t.index ["squad_id"], name: "index_practices_on_squad_id"
   end
 
@@ -143,9 +161,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_15_090839) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "appearances", "matches"
+  add_foreign_key "appearances", "players"
   add_foreign_key "drills", "libraries"
   add_foreign_key "libraries", "users"
-  add_foreign_key "players", "squads"
+  add_foreign_key "matches", "teams"
   add_foreign_key "plays", "libraries"
   add_foreign_key "practice_drills", "drills"
   add_foreign_key "practice_drills", "practices"

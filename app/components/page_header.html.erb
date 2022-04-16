@@ -4,7 +4,7 @@
     <header class="py-6">
         <div class="width flex">
             <div class="flex-1">
-                <h2 class="subtitle"><%= @subtitle %></h2>
+                <h2 class="subtitle"><%= @subtitle.is_a?(Array) ? @subtitle.join(" ") : @subtitle %></h2>
                <h1 class="title"><%= @title %></h1>
             </div>
             <% if content %>

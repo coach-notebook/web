@@ -9,6 +9,9 @@ Rails.application.routes.draw do
 
   resources :drills
   resources :practices
+  resources :teams
+  resources :players
+  resources :matches
 
   resources :squads do
     resources :players

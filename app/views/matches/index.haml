@@ -1,6 +1,8 @@
-= render PageHeader.new(title: Match.model_name.human.pluralize)  do 
-    = link_to t("match.new"), new_match_path, class: "btn-primary"
+= render PageHeader.new(title: Match.model_name.human.pluralize)
 .page-list
     .page-item 
-        .gridx4= render @matches
+        .gridx4
+            = render(@matches) || render(partial: 'application/empty')
+            = link_to new_match_path, class: [:cell, :new] do 
+                .cell-body= t("match.new")
     = render 'pagination'

@@ -17,6 +17,7 @@
 #
 class Drill < ApplicationRecord
   include AccessControlled
+  include Commentable
 
   acts_as_taggable
 

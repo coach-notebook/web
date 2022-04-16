@@ -1,8 +1,7 @@
-= link_to match, class: "cell" do 
-    .cell-image
-    .cell-header
-        = match.home_team ? "vs" : "at"
-        = match.opposition
-    .cell-byline
-        = l(match.played_at, format: :day_date)
-    
+= link_to match, class: [:cell, :match ] do 
+    .cell-body
+        .cell-byline= l(match.played_at, format: :day_date)
+        .cell-header
+            = match.home_team ? "vs" : "at"
+            = match.opposition
+        

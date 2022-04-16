@@ -1,10 +1,13 @@
 = render PageHeader.new(title: @library.name) do
     = link_to t("library.edit"), edit_library_path(@library), class: 'btn-secondary'
-    = link_to t("drill.new"), new_library_drills_path(@library), class: 'btn-primary'
 .page
     .body
-        .gridx4= render @library.drills.accessible_to(current_user)
+        .page-item
+            .gridx4
+                = render @library.drills.accessible_to(current_user)
+                = link_to new_library_drills_path(@library), class: [:cell, :new] do 
+                    .cell-body= t("drill.new")
+        .page-item
+            = render "comments", commentable: @library
     .sidebar
-        = markdown @library.notes
-        .byline
-            = [@library.user, l(@library.created_at, format: :day_date)].join(" | ")
+        .page-item= render @library.tags

@@ -11,6 +11,9 @@
 #
 class Practice < ApplicationRecord
   include AccessControlled
+  include Commentable
+
+  acts_as_taggable
 
   belongs_to :squad
   has_many :practice_drills

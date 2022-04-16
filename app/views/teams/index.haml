@@ -1,6 +1,8 @@
-= render PageHeader.new(title: Team.model_name.human.pluralize) do 
-    = link_to t("team.new"), new_team_path, class: "btn-primary"
+= render PageHeader.new(title: Team.model_name.human.pluralize)
 .page-list
     .page-item
-        .gridx4= render @teams 
+        .gridx4
+            = render(@teams) || render(partial: 'application/empty')
+            = link_to new_team_path, class: [:cell, :new] do 
+                .cell-body= t("team.new")
     = render 'pagination'

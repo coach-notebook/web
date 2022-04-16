@@ -1,5 +1,4 @@
-= link_to practice, class: :cell do
-    .cell-image
-    .cell-header
-        = l(practice.practice_at, format: :day_date)
-    .cell-byline= practice.squad
+= link_to practice, class: [:cell, :practice] do
+    .cell-body
+        .cell-byline= practice.squad
+        .cell-header= l(practice.practice_at, format: :day_date)

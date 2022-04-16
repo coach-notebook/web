@@ -1,6 +1,8 @@
-= render PageHeader.new(title: Drill.model_name.human.pluralize) do
-    = link_to t("drill.new"), new_drill_path, class: 'btn-primary'
+= render PageHeader.new(title: Drill.model_name.human.pluralize)
 .page-list
     .page-item
-        .gridx4= render @drills
+        .gridx4
+            = render(@drills) || render(partial: 'application/empty')
+            = link_to new_drill_path, class: [:cell, :new] do 
+                .cell-body= t("drill.new")
     = render 'pagination'

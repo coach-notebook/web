@@ -2,8 +2,9 @@
 .page-list
     .page
         .body
-            .tags
-                = render @match.tags
+            = render "taggable", taggable: @match
+            - unless @match.appearances.empty?
+                .page-item
+                    .grid= render @match.appearances
             = render "comments", commentable: @match
         .sidebar
-            .grid= render @match.players

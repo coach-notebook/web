@@ -2,7 +2,14 @@
 .page-list{"data-controller": "dashboard"}
     .page-item
         .page-title= Match.model_name.human.pluralize
-        .gridx4= render @matches
+        .gridx4
+            = render(@matches) || render(partial: 'application/empty')
+            = link_to new_match_path, class: [:cell, :new] do 
+                .cell-body= t("match.new")
     .page-item
         .page-title= Practice.model_name.human.pluralize
-        .gridx4= render @practices
+        .gridx4
+            = render(@practices) || render(partial: 'application/empty')
+            = link_to new_practice_path, class: [:cell, :new] do 
+                .cell-body= t("practice.new")
+ 

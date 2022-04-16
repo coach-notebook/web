@@ -28,7 +28,7 @@
     @apply rounded-md py-2 px-3 text-sm font-medium text-neutral-800 hover:bg-neutral-500 hover:bg-opacity-75 dark:text-neutral-300;
   }
   .width {
-    @apply mx-auto w-full p-4 md:max-w-6xl md:p-4 lg:p-4 2xl:p-0;
+    @apply mx-auto w-full p-4 md:max-w-6xl 2xl:p-0;
   }
   .sidebar-heading {
     @apply text-lg font-medium text-neutral-700 dark:text-neutral-300;
@@ -42,6 +42,7 @@
   .page-title {
     @apply mb-2 text-xl text-neutral-700 dark:text-neutral-300;
   }
+
   .subtitle {
     @apply text-2xl font-thin text-neutral-800 dark:text-neutral-400;
   }
@@ -58,12 +59,17 @@
     @apply mb-1 grid grid-cols-1 space-x-4 divide-x dark:divide-neutral-800 md:-mx-4 md:grid-cols-3;
   }
   .body {
-    @apply col-span-2 md:mb-4 md:p-4;
+    @apply col-span-2 space-y-4 divide-y dark:divide-neutral-800 md:mb-4 md:p-4 md:pt-0;
   }
   .sidebar {
-    @apply col-span-1 md:mb-4 md:p-4;
+    @apply col-span-1 md:mb-4 md:p-4 md:pt-0;
   }
-
+  .page-item {
+    @apply pt-4;
+  }
+  .page-item:first-child {
+    @apply pt-0;
+  }
   .gridx4 {
     @apply -mx-1 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4;
   }
@@ -71,10 +77,35 @@
     @apply grid grid-cols-7 gap-4;
   }
   .cell {
-    @apply rounded p-1 hover:bg-neutral-50 dark:bg-neutral-900  dark:hover:bg-neutral-800;
+    @apply relative h-40 rounded-md   dark:border-neutral-800  dark:bg-neutral-700;
+  }
+  a.cell {
+    @apply hover:bg-neutral-50 dark:hover:bg-neutral-600;
+  }
+  .cell.new {
+    @apply w-3/5;
+  }
+  .cell.empty {
+    @apply dark:bg-neutral-800;
+  }
+  /* https://hypercolor.dev */
+  /* .cell.team {
+    @apply bg-gradient-to-br from-pink-500 via-red-500 to-yellow-500;
+  }
+  .cell.drill {
+    @apply bg-gradient-to-r from-green-300 via-blue-500 to-purple-600;
+  }
+  .cell.practice {
+    @apply bg-gradient-to-r from-purple-400 to-yellow-400;
+  } */
+  .cell.new {
+    @apply bg-sky-700 text-sky-100 hover:bg-sky-600 hover:text-sky-200;
   }
   .cell-image {
-    @apply mb-2 h-40 w-full rounded border-neutral-600 bg-neutral-100 p-4  text-neutral-900 dark:bg-neutral-700;
+    @apply w-full;
+  }
+  .cell-body {
+    @apply absolute left-0 bottom-0 p-4;
   }
   .cell-header {
   }
@@ -117,7 +148,6 @@
   .flash-notice {
     @apply bg-sky-100 text-sky-900;
   }
-
   .pagination {
     @apply flex items-center justify-between bg-transparent pt-4;
   }
@@ -141,6 +171,9 @@
   }
   .form-input-wrapper {
     @apply col-span-3 col-start-1 py-4 md:col-span-2 md:col-start-2;
+  }
+  .form-input-wrapper:first-of-type {
+    @apply pt-0;
   }
   .form-input {
     @apply col-span-2 col-start-2 w-full rounded-2xl border-neutral-300 p-4 shadow ring-neutral-100  focus:ring-sky-200 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200;
@@ -171,16 +204,13 @@
     @apply gap-6;
   }
   .comment {
-    @apply pt-2 text-xl antialiased;
+    @apply pt-2 antialiased;
   }
   .comment p {
     @apply mb-1;
   }
   .comments form {
     @apply pt-2;
-  }
-  .comments form .form-input {
-    @apply text-xl;
   }
   .comments form label.form-label {
     @apply hidden;

@@ -1,9 +1,4 @@
-= link_to drill, class: "cell" do 
-    .cell-image
-    .cell-header= drill.name
-    - unless drill.tags.empty?
-        .mb-1
-            - drill.tags.each do |tag|
-                .tag= t("tags.#{tag}")
-    .cell-byline= pluralize drill.duration_minutes, Drill.human_attribute_name(:minute) 
-    
+= link_to drill, class: [:cell, :drill] do 
+    .cell-body
+        .cell-byline= pluralize drill.duration_minutes, Drill.human_attribute_name(:minute) 
+        .cell-header= drill.name

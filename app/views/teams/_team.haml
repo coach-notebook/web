@@ -1,5 +1,4 @@
-= link_to team, class: :cell do
-    .cell-image
-    .cell-header
-        = team
-    .cell-byline= team.squad
+= link_to team, class: [:cell, :team] do
+    .cell-body
+        .cell-byline= team.squad
+        .cell-header= team

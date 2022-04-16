@@ -3,23 +3,24 @@
 .page-list
     .page
         .body
-            = markdown @drill.body
-        .sidebar
-            .sidebar-item 
-                - @drill.tags.each do |tag|
-                    .tag= t("tags.#{tag}")
+            = render "tags", taggable: @drill
+            .page-item
+                = markdown @drill.body
             - if @drill.keys?
-                .sidebar-item
-                    .sidebar-heading= Drill.human_attribute_name(:keys) 
+                .page-item
+                    .page-heading= Drill.human_attribute_name(:keys) 
                     - @drill.keys.each do |key|
-                        .text-sm= key 
+                        = key 
             - if @drill.variations?
-                .sidebar-item
-                    .sidebar-heading= Drill.human_attribute_name(:variations) 
+                .page-item
+                    .page-heading= Drill.human_attribute_name(:variations) 
                     - @drill.variations.each do |variation|
-                        .text-sm= variation 
+                        = variation 
             - if @drill.goals?
-                .sidebar-item
-                    .sidebar-heading= Drill.human_attribute_name(:goals) 
+                .page-item
+                    .page-heading= Drill.human_attribute_name(:goals) 
                     - @drill.goals.each do |goal|
-                        .text-sm= goal 
+                        = goal 
+            = render "comments", commentable: @drill
+        .sidebar
+            .page-item= render @drill.tags

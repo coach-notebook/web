@@ -1,3 +1,5 @@
-.grid.comments
-    = render commentable.comments.accessible_to(current_user)
-    = render "comments/new", commentable: commentable
+.page-item.comments
+    .page-title= Comment.model_name.human.pluralize
+    .grid
+        = render commentable.comments.accessible_to(current_user)
+        = render "comments/new", commentable: commentable

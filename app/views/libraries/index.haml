@@ -1,6 +1,8 @@
-= render PageHeader.new(title: Library.model_name.human.pluralize) do
-    = link_to t("library.new"), new_library_path, class: 'btn-primary'
+= render PageHeader.new(title: Library.model_name.human.pluralize)
 .page-list
     .page-item
-        .gridx4= render @libraries
+        .gridx4
+            = render(@libraries) || render(partial: 'application/empty')
+            = link_to new_library_path, class: [:cell, :new] do 
+                .cell-body= t("library.new")
     = render 'pagination'

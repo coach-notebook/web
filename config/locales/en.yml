@@ -5,13 +5,18 @@ en:
   title: coach_notebook
   minute: minute
   dashboard: Dashboard
+  squad:
+    create:
+      success: Successfully Created Squad
+  team:
+    squads_empty: No Squads Found
   session:
     new: Sign In
     create:
       failed: Check email address & password
   user:
-    create: Sign Up
-    created:
+    new: Sign Up
+    create:
       success: Successful Sign Up
   time:
     formats:

@@ -22,7 +22,7 @@ class SquadsController < ApplicationController
     @squad = Squad.create(safe_params.merge(user: current_user))
     if @squad.valid?
       current_user.access_controls.create(access_controlled: @squad)
-      flash[:success] = t("squad.created")
+      flash[:success] = t("squad.create.success")
       redirect_to @squad
     else
       flash[:warning] = @squad.errors.full_messages

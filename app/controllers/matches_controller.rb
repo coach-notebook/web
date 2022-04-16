@@ -50,11 +50,10 @@ class MatchesController < ApplicationController
   def destroy
     if @match.delete
       flash[:success] = t("match.deleted")
-      redirect_to matches_path
     else
       flash[:warning] = @match.errors.full_messages
-      redirect_to matches_path
     end
+    redirect_to matches_path
   end
 
   def set_match

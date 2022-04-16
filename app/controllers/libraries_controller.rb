@@ -14,10 +14,6 @@ class LibrariesController < ApplicationController
     render template: "libraries/form"
   end
 
-  def edit
-    render template: "libraries/form"
-  end
-
   def create
     @library = Library.create safe_params.merge(user: current_user)
     if @library.valid?

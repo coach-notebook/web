@@ -60,11 +60,10 @@ class PracticesController < ApplicationController
   def destroy
     if @practice.delete
       flash[:success] = t("squad.deleted")
-      redirect_to practices_path
     else
       flash[:warning] = @practice.errors.full_messages
-      redirect_to practices_path
     end
+    redirect_to practices_path
   end
 
   def add_drill

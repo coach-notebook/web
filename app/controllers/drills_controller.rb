@@ -30,7 +30,7 @@ class DrillsController < ApplicationController
       variations: JSON.parse(safe_params.fetch(:variations, "[]")),
       tags: JSON.parse(safe_params.fetch(:tags, "[]")),
       keys: JSON.parse(safe_params.fetch(:keys, "[]")),
-      goals: JSON.parse(safe_params.fetch(:goals, "[]")),
+      goals: JSON.parse(safe_params.fetch(:goals, "[]"))
     })
     if @drill.valid?
       current_user.access_controls.create(access_controlled: @drill)
@@ -47,7 +47,7 @@ class DrillsController < ApplicationController
       variations: JSON.parse(safe_params.fetch(:variations, "[]")),
       tags: JSON.parse(safe_params.fetch(:tags, "[]")),
       keys: JSON.parse(safe_params.fetch(:keys, "[]")),
-      goals: JSON.parse(safe_params.fetch(:goals, "[]")),
+      goals: JSON.parse(safe_params.fetch(:goals, "[]"))
     }))
     if @drill.valid?
       redirect_to @drill

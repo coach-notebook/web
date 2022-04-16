@@ -8,10 +8,9 @@ class CommentsController < ApplicationController
     if @comment.valid?
       current_user.access_controls.create(access_controlled: @comment)
       flash[:success] = t("comment.created")
-      redirect_to @comment.commentable
     else
       flash[:warning] = @comment.errors.full_messages
-      redirect_to @comment.commentable
     end
+    redirect_to @comment.commentable
   end
 end

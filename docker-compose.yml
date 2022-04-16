@@ -47,7 +47,7 @@ services:
       - .:/app
       - gem-cache:/usr/local/bundle/gems
       - node-modules:/app/node_modules
-    command: "yarn build:js  --watch"    
+    command: "yarn dev:js  --watch"    
   css: 
     tty: true # https://github.com/evanw/esbuild/issues/1848
     env_file: .env
@@ -57,7 +57,7 @@ services:
       - .:/app
       - gem-cache:/usr/local/bundle/gems
       - node-modules:/app/node_modules
-    command: "yarn build:css --watch"
+    command: "yarn dev:css --watch"
 volumes:
   gem-cache: 
   node-modules:

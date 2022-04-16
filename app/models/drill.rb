@@ -28,12 +28,12 @@ class Drill < ApplicationRecord
 
   def self.tags
     ["mid-range-shot",
-     "attacking-the-basket",
-     "one-on-one-defence",
-     "overplay",
-     "defensive-slides",
-     "quick-feet",
-     "court-speed",
-     "handles"]
+      "attacking-the-basket",
+      "one-on-one-defence",
+      "overplay",
+      "defensive-slides",
+      "quick-feet",
+      "court-speed",
+      "handles"]
   end
 end

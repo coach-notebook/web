@@ -43,11 +43,10 @@ class SquadsController < ApplicationController
   def destroy
     if @squad.delete
       flash[:success] = t("squad.deleted")
-      redirect_to squads_path
     else
       flash[:warning] = @squad.errors.full_messages
-      redirect_to squads_path
     end
+    redirect_to squads_path
   end
 
   def set_squad

@@ -4,8 +4,7 @@ require("esbuild")
     absWorkingDir: path.join(process.cwd(), "app/frontend"),
     bundle: true,
     tsconfig: path.join(process.cwd(), "tsconfig.json"),
-    entryPoints: ["application.tsx"],
-    loader: { ".ts": "ts" },
+    entryPoints: ["application.tsx"],-
     logLevel: "info",
     banner: { js: "// build with esbuild" },
     minify: true,
@@ -13,7 +12,6 @@ require("esbuild")
     platform: "browser",
     plugins: [],
     sourcemap: true,
-    watch: true,
   })
   .then(() => console.log("⚡ Done"))
   .catch(() => process.exit(1));

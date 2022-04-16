@@ -2,7 +2,7 @@ module.exports = {
   content: [
     "./app/helpers/**/*.rb",
     "./app/views/**/*.(haml|erb)",
-    // "./app/frontend/**/*.(ts|tsx)",
+    "./app/frontend/**/*.(ts|tsx)",
     "./app/components/**/*.(haml|erb)",
     "./app/frontend/entrypoints/application.css",
   ],

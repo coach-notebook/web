@@ -25,7 +25,10 @@
     "postcss-import": "^14.1.0"
   },
   "scripts": {
-    "build:js": "node ./esbuild.config.js",
-    "build:css": "tailwind build --watch --config ./tailwind.config.js --input ./app/frontend/application.css --output ./app/assets/builds/application.css"
+    "build": "yarn build:css; yarn build:js",
+    "build:css": "tailwind build --config ./tailwind.config.js --input ./app/frontend/application.css --output ./app/assets/builds/application.css",
+    "build:js": "esbuild --bundle --tsconfig=./tsconfig.json --log-level=error --minify --outdir=./app/assets/builds --sourcemap --drop:console --platform=browser --target=esnext ./app/frontend/application.tsx",
+    "dev:js": "node ./esbuild.config.js",
+    "dev:css": "tailwind build --watch --config ./tailwind.config.js --input ./app/frontend/application.css --output ./app/assets/builds/application.css"
   }
 }

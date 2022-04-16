@@ -50,11 +50,10 @@ class TeamsController < ApplicationController
   def destroy
     if @team.delete
       flash[:success] = t("team.deleted")
-      redirect_to teams_path
     else
       flash[:warning] = @team.errors.full_messages
-      redirect_to teams_path
     end
+    redirect_to teams_path
   end
 
   def set_team

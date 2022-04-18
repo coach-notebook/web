@@ -38,6 +38,16 @@ services:
       - gem-cache:/usr/local/bundle/gems
       - node-modules:/app/node_modules
     command: ""
+  esbuild: 
+    tty: true # https://github.com/evanw/esbuild/issues/1848
+    env_file: .env
+    build:
+      context: .
+    volumes:
+      - .:/app
+      - gem-cache:/usr/local/bundle/gems
+      - node-modules:/app/node_modules
+    command: "yarn build:js  --watch"    
   css: 
     tty: true # https://github.com/evanw/esbuild/issues/1848
     env_file: .env
@@ -47,7 +57,7 @@ services:
       - .:/app
       - gem-cache:/usr/local/bundle/gems
       - node-modules:/app/node_modules
-    command: "yarn tailwind build --watch --config ./tailwind.config.js --input ./app/frontend/entrypoints/application.css --output ./app/assets/builds/application.css"
+    command: "yarn build:css --watch"
 volumes:
   gem-cache: 
   node-modules:

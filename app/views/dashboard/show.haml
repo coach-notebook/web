@@ -1,5 +1,5 @@
 = render PageHeader.new(title: t("app.dashboard"))
-.page-list
+.page-list{"data-controller": "dashboard"}
     .page-item
         .page-title= Match.model_name.human.pluralize
     .page-item

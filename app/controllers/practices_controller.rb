@@ -5,6 +5,10 @@ class PracticesController < ApplicationController
     params.require(:practice).permit(:practice_at, :copy_practice_id, :squad_id)
   end
 
+  def index
+    @pagy, @practices = pagy Practice.all
+  end
+
   def new
     @practice = Practice.new
     render template: "practices/form"

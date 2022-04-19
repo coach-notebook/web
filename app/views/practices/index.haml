@@ -2,8 +2,5 @@
     = link_to t("practice.new"), new_practice_path, class: "btn-primary"
 .page-list
     .page-item 
-        .page-title= Practice.model_name.human.pluralize
-        .gridx4= render Practice.future
-    .page-item
-        .page-title= Practice.model_name.human.pluralize
-        .gridx4= render Practice.past
+        .gridx4= render @practices
+    = render 'pagination'

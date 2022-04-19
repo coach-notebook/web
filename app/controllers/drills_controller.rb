@@ -2,7 +2,7 @@ class DrillsController < ApplicationController
   before_action :set_drill, only: [:show, :edit, :destroy]
 
   def safe_params
-    params.require(:drill).permit(:name, :body, :duration_minutes, :library_id, :tags)
+    params.require(:drill).permit(:name, :body, :duration_minutes, :library_id, :tags, :keys, :goals, :variations, :number_of_players)
   end
 
   def index
@@ -19,7 +19,12 @@ class DrillsController < ApplicationController
   end
 
   def create
-    @drill = Drill.create safe_params
+    @drill = Drill.create safe_params.merge({
+      variations: JSON.parse(safe_params.fetch(:variations, "[]")),
+      tags: JSON.parse(safe_params.fetch(:tags, "[]")),
+      keys: JSON.parse(safe_params.fetch(:keys, "[]")),
+      goals: JSON.parse(safe_params.fetch(:goals, "[]"))
+    })
     if @drill.valid?
       flash[:success] = t("drill.created")
       redirect_to @drill

@@ -1,8 +1,20 @@
-= render PageHeader.new(title: Drill.model_name.human) 
+= render PageHeader.new(title: Drill.model_name.human)     
 = form_with model: @drill, builder: CoachNotebookFormBuilder do |form|
-    = form.hidden_field :library_id
+    = form.select :library_id, Library.all.map{|l| [l.name, l.id]}
     = form.text_field :name
     = form.text_area :body
-    = form.text_field :duration_minutes
-    = form.text_field :number_of_players
+    = form.tag_field :variations
+    = form.tag_field :keys
+    = form.tag_field :tags
+    = form.tag_field :goals
+    = form.select :duration_minutes, [5, 10, 15, 20, 30, 45, 60, 90]
+    = form.select :number_of_players, ["1", "1v1", "1v2", "2v2","3v3", "4v4", "5v5"]
     = form.submit
+
+.hidden
+    .form-label
+        asdakldjklasj
+    .form-input-wrapper
+        .form-input
+        .form-input-tag.form-tag
+        .form-submit

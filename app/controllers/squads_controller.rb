@@ -6,8 +6,7 @@ class SquadsController < ApplicationController
   end
 
   def index
-    @active_squads = Squad.where(user: current_user, active: true)
-    @inactive_squads = Squad.where(user: current_user, active: false)
+    @pagy, @squads = pagy Squad.all
   end
 
   def new

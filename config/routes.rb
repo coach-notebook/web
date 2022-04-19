@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   delete "/practices/:id/drills/:drill_id", to: "practices#remove_drill"
   root "dashboard#show"
 
+  get "/signin", to: "sessions#new"
+  post "/signin", to: "sessions#create"
+  get "/signout", to: "sessions#destroy"
+
   resources :drills
   resources :practices
   resources :teams

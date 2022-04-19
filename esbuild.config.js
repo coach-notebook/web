@@ -3,6 +3,7 @@ require("esbuild")
   .build({
     absWorkingDir: path.join(process.cwd(), "app/frontend"),
     bundle: true,
+    tsconfig: path.join(process.cwd(), "tsconfig.json"),
     entryPoints: ["application.tsx"],
     loader: { ".ts": "ts" },
     logLevel: "info",

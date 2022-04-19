@@ -1,11 +1,6 @@
 = render PageHeader.new(title: Squad.model_name.human.pluralize) do
     = link_to t("squad.new"), new_squad_path, class: 'btn-primary'
 .page-list
-    - if @active_squads
-        %div
-            .page-title= t("squad.active")
-            .gridx4= render @active_squads
-    - if @inactive_squads
-        %div
-            .page-title= t("squad.inactive")
-            .gridx4= render @inactive_squads
+    .page-item
+        .gridx4= render @squads
+    = render 'pagination'

@@ -14,4 +14,8 @@ class User < ApplicationRecord
   has_many :squads
   has_many :practices, through: :squads
   has_many :drills, through: :libraries
+
+  has_secure_password
+
+  validates :email_address, presence: true, uniqueness: true, format: { with: /\A[^@\s]+@[^@\s]+\z/, message: "Invalid email" }
 end

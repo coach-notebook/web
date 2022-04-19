@@ -2,7 +2,7 @@ require "redcarpet"
 
 module ApplicationHelper
   include Pagy::Frontend
-  # redcarpet markdown
+
   def markdown(text)
     options = {
       filter_html: true,

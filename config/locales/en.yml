@@ -2,6 +2,8 @@ en:
   hello: "Hello world"
   title: coach_notebook
   minute: minute
+  session:
+    new: Sign In
   time:
     formats:
       day_date: "%A, %-d %B"

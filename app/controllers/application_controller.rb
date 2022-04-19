@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def current_user
-    User.first
+    Session.find_by(token: session[:token]).user
+  rescue
+    false
   end
 end

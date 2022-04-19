@@ -1,7 +1,7 @@
 !!!5 
 %html
   %head
-    %title= [yield(:subtitle), yield(:title), t(:title)].compact.join(" | ") 
+    %title= t("app.name")
     %meta{ name: "viewport", content: "width=device-width,initial-scale=1" }
     %link{ rel: "preconnect", href: "//fonts.googleapis.com" }
     %link{ rel: "preconnect", href: "//fonts.gstatic.com", crossorigin: true }
@@ -10,8 +10,12 @@
     = csp_meta_tag
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_include_tag "application", "data-turbo-track": "reload", defer: true 
-  %body
-    %nav= render "navigation"
-    %header= yield :header
-    %main= yield 
-    %footer= render "footer"
+  %body.sessions
+    .grid.grid-cols-3.grid-rows-3.gap-2.w-screen.h-screen
+      .row-start-2.col-start-2.col-end-2.align-middle
+        .shadow.p-12.rounded-lg.bg-neutral-100
+          - unless flash.empty?
+            .flashes
+              - flash.each do |type, message| 
+                %div{ class: type}= message
+          = yield 
